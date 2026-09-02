@@ -8,7 +8,7 @@ Cukup upload foldernya ke hosting mana pun dan langsung jalan.
 site/
 ├─ index.html                 struktur halaman
 ├─ assets/css/style.css       tampilan
-├─ assets/js/config.js        ← SEMUA DATA ADA DI SINI (yang perlu Anda ubah)
+├─ data/site.json        ← SEMUA DATA ADA DI SINI (yang perlu Anda ubah)
 ├─ assets/js/main.js          logika: render, filter, kalkulator, WhatsApp
 └─ assets/img/                gambar (saat ini masih placeholder)
 ```
@@ -17,7 +17,7 @@ site/
 
 ## 1. Yang WAJIB diubah lebih dulu
 
-Buka `assets/js/config.js`, ubah baris berikut:
+Buka `data/site.json`, ubah baris berikut:
 
 ```js
 whatsapp: "6281234567890",
@@ -55,14 +55,14 @@ langsung terbuka dengan pesan yang sudah terisi. Ada 8 titik masuk ke WhatsApp:
 7. Form kontak — menyusun pesan rapi berisi nama, nomor, unit, dan rencana pembayaran
 8. Tombol melayang + bar bawah khusus layar HP
 
-Teks pesannya bisa Anda ubah di `pesanWa` dalam `config.js`.
+Teks pesannya bisa Anda ubah di `pesanWa` dalam `data/site.json`.
 Tanda `{unit}`, `{harga}`, `{dp}`, `{tenor}`, `{angsuran}` akan diganti otomatis oleh sistem.
 
 ---
 
 ## 3. Memasang video YouTube
 
-Salin **link videonya apa adanya**, tempel ke `config.js`:
+Salin **link videonya apa adanya**, tempel ke `data/site.json`:
 
 ```js
 youtube: [
@@ -176,14 +176,14 @@ video) supaya pengunjung berkuota tipis tidak keberatan.
 ## 5. Peta lokasi
 
 Google Maps → cari lokasi → **Bagikan** → tab **Sematkan peta** → salin URL di dalam
-`src="..."`, lalu tempel ke `lokasi.embedMaps` di `config.js`.
+`src="..."`, lalu tempel ke `lokasi.embedMaps` di `data/site.json`.
 
 ---
 
 ## 6. Mengganti foto
 
 Ganti file di `assets/img/` dengan foto asli (boleh `.jpg` / `.webp`), lalu sesuaikan
-nama filenya di `config.js`:
+nama filenya di `data/site.json`:
 
 | Ganti dengan                          | Ukuran ideal    | Dipakai di          |
 |---------------------------------------|-----------------|---------------------|
@@ -244,3 +244,63 @@ python3 -m http.server 4399
 - Siapkan **brosur PDF** dan taruh di `assets/`, lalu tambahkan tombol unduh.
 - Kalau nanti butuh banyak halaman (satu halaman per klaster), struktur ini
   gampang digandakan: salin `index.html`, ubah bagian yang perlu.
+
+---
+
+# Mengubah isi lewat Menu Admin
+
+Setelah website dipasang di Netlify, Anda tidak perlu lagi menyentuh file.
+Buka `alamat-website-anda/admin`, login, ubah isinya lewat formulir, tekan
+**Publish** — website langsung ter-update sendiri.
+
+Menu admin memuat seluruh isi website: identitas, kontak, pesan otomatis
+WhatsApp, tampilan atas, keunggulan, tipe unit, video YouTube & TikTok, lokasi,
+kalkulator KPR, testimoni, tanya jawab, dan promo.
+
+## Cara memasangnya (sekali saja)
+
+Butuh dua akun gratis: **GitHub** dan **Netlify**.
+
+### 1. Naikkan ke GitHub
+
+Buat repositori baru di github.com (boleh private), lalu di Terminal dari
+folder ini jalankan perintah yang ditunjukkan GitHub, kira-kira:
+
+```
+git remote add origin https://github.com/NAMA-ANDA/NAMA-REPO.git
+git push -u origin main
+```
+
+### 2. Sambungkan ke Netlify
+
+1. Masuk ke netlify.com, pilih **Add new site → Import an existing project**
+2. Pilih GitHub, lalu pilih repositori tadi
+3. Bagian build biarkan kosong, publish directory diisi titik: `.`
+4. Tekan **Deploy**
+
+### 3. Nyalakan pintu login
+
+Di dashboard Netlify, pada situs tersebut:
+
+1. **Site configuration → Identity → Enable Identity**
+2. Masih di Identity: **Registration → Invite only**
+   (wajib, supaya orang lain tidak bisa mendaftar sendiri)
+3. **Services → Git Gateway → Enable Git Gateway**
+4. Tab **Identity → Invite users**, masukkan email Anda
+
+Cek email undangannya, buat kata sandi, dan Anda akan langsung diarahkan ke
+menu admin.
+
+## Catatan penting
+
+**Isi website sekarang ada di `data/site.json`**, bukan lagi di file
+JavaScript. File itu tetap boleh diubah manual dengan editor teks, tapi kalau
+sudah pakai menu admin sebaiknya lewat menu saja supaya tidak bentrok.
+
+**Halaman ini harus dibuka lewat alamat http://**, tidak bisa dengan klik ganda
+`index.html` dari Finder — karena isinya diambil dari file JSON terpisah. Untuk
+melihat di komputer sendiri, jalankan `python3 preview-lokal.py`.
+
+**Jangan hapus folder `admin/`** saat mengunggah ke hosting. Isinya hanya dua
+file kecil dan tidak berisi kata sandi apa pun — pengamanannya ada di Netlify,
+bukan di file.
