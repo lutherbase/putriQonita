@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="admin.css?v=7">
+<link rel="stylesheet" href="admin.css?v=8">
 </head>
 <body>
 
@@ -46,6 +46,12 @@
         <span class="atas__sub" id="atasInfo"></span>
       </div>
     </div>
+    <div class="atas__pilih" id="pilihWadah" hidden>
+      <label for="pilihPerumahan">Perumahan</label>
+      <select id="pilihPerumahan"></select>
+      <button class="tbl tbl--kecil" id="tblTambahPerumahan" title="Tambah perumahan baru">+ Baru</button>
+      <button class="tbl tbl--kecil tbl--bahaya" id="tblHapusPerumahan" title="Hapus perumahan ini">Hapus</button>
+    </div>
     <div class="atas__kanan">
       <span class="simpan-info" id="simpanInfo"></span>
       <a class="tbl tbl--polos" href="../" target="_blank" rel="noopener">Lihat Website</a>
@@ -63,8 +69,8 @@
 <div class="kabar" id="kabar" hidden></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="../assets/js/koneksi.js?v=2"></script>
-<script src="skema.js?v=2"></script>
-<script src="admin.js?v=6"></script>
+<script src="../assets/js/koneksi.js?v=8"></script>
+<script src="skema.js?v=8"></script>
+<script src="admin.js?v=9"></script>
 </body>
 </html>

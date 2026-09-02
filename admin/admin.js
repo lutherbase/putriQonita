@@ -7,6 +7,8 @@
   "use strict";
 
   const $ = (s, c) => (c || document).querySelector(s);
+  const esc = (t) => String(t == null ? "" : t)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   const db = window.supabase.createClient(window.KONEKSI.url, window.KONEKSI.kunci);
 
   /* Sistem penyimpanan menuntut alamat email, sedangkan yang diketik cukup
@@ -26,6 +28,7 @@
   let data = null;          // isi website yang sedang diedit
   let asli = "";            // salinan awal, untuk tahu ada perubahan atau tidak
   let aktif = 0;            // kelompok yang sedang dibuka
+  let pAktif = 0;           // perumahan yang sedang diedit
   let sesi = null;
 
   /* ------------------------------------------------------------------ */
@@ -148,9 +151,8 @@
     $("#layarMasuk").hidden = true;
     $("#aplikasi").hidden = false;
 
-    const inisial = (data.brand && data.brand.logoTeks) || "AD";
-    $("#atasLogo").textContent = inisial;
-    $("#atasNama").textContent = (data.brand && data.brand.nama) || "Menu Admin";
+    $("#atasLogo").textContent = (data.developer && data.developer.logoTeks) || "AD";
+    $("#atasNama").textContent = (data.developer && data.developer.nama) || "Menu Admin";
     $("#atasInfo").textContent = sesi && sesi.user ? kePengguna(sesi.user.email) : "";
 
     if (baris.updated_at) {
@@ -159,8 +161,30 @@
         { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
     }
 
+    isiPilihan();
     bangunMenu();
     bukaKelompok(0);
+  }
+
+  /* Kelompok "bersama" mengedit data tingkat atas; kelompok "perumahan"
+     mengedit perumahan yang sedang dipilih di bar atas. */
+  function sumber(k) {
+    if (k.lingkup === "perumahan") {
+      const daftar = data.perumahan || (data.perumahan = []);
+      if (!daftar[pAktif]) pAktif = 0;
+      return daftar[pAktif] || null;
+    }
+    return data;
+  }
+
+  function isiPilihan() {
+    const sel = $("#pilihPerumahan");
+    const daftar = data.perumahan || [];
+    sel.innerHTML = daftar.map((p, i) =>
+      '<option value="' + i + '">' + (p.nama || "(tanpa nama)") + "</option>").join("");
+    sel.value = String(pAktif);
+    $("#pilihWadah").hidden = false;
+    $("#tblHapusPerumahan").disabled = daftar.length <= 1;
   }
 
   function bangunMenu() {
@@ -187,11 +211,21 @@
   function gambarIsi() {
     const k = window.SKEMA[aktif];
     const isi = $("#isi");
-    isi.innerHTML = "<h2>" + k.label + "</h2>" + (k.catatan ? '<p class="catatan">' + k.catatan + "</p>" : "");
+    const induk = sumber(k);
 
-    if (k.jenis === "grup")           isi.appendChild(gambarGrup(k.isi, data[k.kunci]));
-    else if (k.jenis === "daftarTeks") isi.appendChild(gambarDaftarTeks(data, k.kunci));
-    else if (k.jenis === "daftar")     isi.appendChild(gambarDaftar(k, data[k.kunci]));
+    const nama = k.lingkup === "perumahan" && induk ? " — " + (induk.nama || "(tanpa nama)") : "";
+    isi.innerHTML = "<h2>" + k.label + esc(nama) + "</h2>" +
+      (k.catatan ? '<p class="catatan">' + k.catatan + "</p>" : "");
+
+    if (!induk) {
+      isi.insertAdjacentHTML("beforeend", '<div class="kosong">Belum ada perumahan. Tekan “+ Baru” di bar atas.</div>');
+      return;
+    }
+
+    if (k.jenis === "grupPerumahan")   isi.appendChild(gambarGrup(k.isi, induk));
+    else if (k.jenis === "grup")       isi.appendChild(gambarGrup(k.isi, induk[k.kunci] || (induk[k.kunci] = {})));
+    else if (k.jenis === "daftarTeks") isi.appendChild(gambarDaftarTeks(induk, k.kunci));
+    else if (k.jenis === "daftar")     isi.appendChild(gambarDaftar(k, induk[k.kunci] || (induk[k.kunci] = [])));
   }
 
   function gambarGrup(kolom, objek) {
@@ -428,6 +462,72 @@
   function tukar(arr, a, b) { const t = arr[a]; arr[a] = arr[b]; arr[b] = t; }
 
   /* ------------------------------------------------------------------ */
+  /* Menambah, mengganti, menghapus perumahan                            */
+  /* ------------------------------------------------------------------ */
+  $("#pilihPerumahan").addEventListener("change", (e) => {
+    pAktif = Number(e.target.value) || 0;
+    gambarIsi();
+  });
+
+  function buatSlug(t) {
+    return String(t || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60);
+  }
+
+  $("#tblTambahPerumahan").addEventListener("click", () => {
+    const nama = prompt("Nama perumahan baru:");
+    if (!nama || !nama.trim()) return;
+
+    let slug = buatSlug(nama);
+    const dipakai = (data.perumahan || []).map((p) => p.slug);
+    if (!slug) slug = "perumahan-" + (dipakai.length + 1);
+    while (dipakai.indexOf(slug) !== -1) slug = slug + "-2";
+
+    /* Perumahan baru dimulai dari kerangka kosong, bukan salinan yang lama —
+       supaya tidak ada data perumahan lain yang terbawa tanpa disadari. */
+    const contoh = (data.perumahan || [])[0] || {};
+    data.perumahan.push({
+      slug: slug,
+      nama: nama.trim(),
+      tagline: "",
+      logoTeks: nama.trim().slice(0, 2).toUpperCase(),
+      lokasiSingkat: contoh.lokasiSingkat || "",
+      ringkas: "",
+      hero: { label: "", judul1: nama.trim(), judul2: "", deskripsi: "", gambar: "/assets/img/hero.svg", statistik: [] },
+      trustBadges: [],
+      keunggulan: [],
+      unit: [],
+      youtube: [],
+      tiktok: [],
+      lokasi: { embedMaps: "", linkMaps: "", sekitar: [] },
+      kpr: contoh.kpr ? Object.assign({}, contoh.kpr) : { dpPersen: 15, tenorTahun: 15, bungaPersen: 7.5 },
+      testimoni: [],
+      faq: [],
+      promo: { judul: "", daftar: [], catatan: "" }
+    });
+
+    pAktif = data.perumahan.length - 1;
+    isiPilihan();
+    aktif = window.SKEMA.findIndex((k) => k.kunci === "__identitas");
+    bukaKelompok(aktif < 0 ? 0 : aktif);
+    tandaiBerubah();
+    kabar('Perumahan "' + nama.trim() + '" ditambahkan. Jangan lupa tekan Simpan.');
+  });
+
+  $("#tblHapusPerumahan").addEventListener("click", () => {
+    const daftar = data.perumahan || [];
+    if (daftar.length <= 1) { kabar("Tidak bisa dihapus — harus ada minimal satu perumahan.", true); return; }
+    const p = daftar[pAktif];
+    if (!confirm('Hapus "' + (p.nama || "perumahan ini") + '" beserta seluruh unit, video, dan isinya?\n\nTindakan ini tidak bisa dibatalkan setelah Anda menekan Simpan.')) return;
+    daftar.splice(pAktif, 1);
+    pAktif = 0;
+    isiPilihan();
+    gambarIsi();
+    tandaiBerubah();
+    kabar("Perumahan dihapus. Tekan Simpan untuk memberlakukannya.");
+  });
+
+  /* ------------------------------------------------------------------ */
   /* Menyimpan                                                           */
   /* ------------------------------------------------------------------ */
   function adaPerubahan() { return data && JSON.stringify(data) !== asli; }
@@ -435,12 +535,30 @@
   function tandaiBerubah() {
     $("#tblSimpan").disabled = !adaPerubahan();
     $("#simpanInfo").textContent = adaPerubahan() ? "Ada perubahan yang belum disimpan" : "";
+
+    // nama perumahan yang sedang diketik ikut berubah di daftar pilihan
+    const sel = $("#pilihPerumahan");
+    const p = (data.perumahan || [])[pAktif];
+    if (sel && p && sel.options[pAktif]) sel.options[pAktif].textContent = p.nama || "(tanpa nama)";
   }
 
   $("#tblSimpan").addEventListener("click", async () => {
     const nomor = data.kontak && data.kontak.whatsapp;
     if (!/^62[0-9]{8,15}$/.test(String(nomor || ""))) {
       kabar("Nomor WhatsApp belum benar. Harus diawali 62, tanpa + dan tanpa 0.", true);
+      return;
+    }
+
+    const daftar = data.perumahan || [];
+    const slugKosong = daftar.find((p) => !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(String(p.slug || "")));
+    if (slugKosong) {
+      kabar('Alamat halaman untuk "' + (slugKosong.nama || "perumahan baru") + '" belum benar. Isi di menu Identitas Perumahan.', true);
+      return;
+    }
+    const semuaSlug = daftar.map((p) => p.slug);
+    const kembar = semuaSlug.find((x, i) => semuaSlug.indexOf(x) !== i);
+    if (kembar) {
+      kabar('Ada dua perumahan dengan alamat halaman sama: "' + kembar + '". Ubah salah satunya.', true);
       return;
     }
 

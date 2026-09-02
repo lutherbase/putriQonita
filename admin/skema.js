@@ -4,21 +4,33 @@
    bagaimana tampilannya. Kalau nanti ada data baru di website, tambahkan
    keterangannya di sini — formulirnya akan muncul dengan sendirinya.
 
-   Jenis kolom: teks | panjang | angka | gambar | daftarTeks | daftar | grup
+   Jenis kolom : teks | panjang | angka | gambar | pilihan | daftarTeks | daftar | grup
+   lingkup     : "bersama"   -> berlaku untuk semua perumahan (kontak, pesan WA)
+                 "perumahan" -> milik masing-masing perumahan
    ========================================================================= */
 window.SKEMA = [
   {
-    kunci: "brand", label: "Identitas Perumahan", ikon: "🏡", jenis: "grup",
+    kunci: "developer", label: "Identitas Anda", ikon: "🏢", jenis: "grup", lingkup: "bersama",
+    catatan: "Berlaku untuk semua perumahan. Diisi sekali saja.",
     isi: [
-      { kunci: "nama",          label: "Nama Perumahan",       jenis: "teks" },
-      { kunci: "tagline",       label: "Slogan",               jenis: "teks" },
-      { kunci: "developer",     label: "Nama Developer",       jenis: "teks" },
-      { kunci: "logoTeks",      label: "Inisial Logo",         jenis: "teks", bantuan: "2 huruf, mis. GH" },
-      { kunci: "lokasiSingkat", label: "Kota",                 jenis: "teks", bantuan: "Tampil di bar paling atas" }
+      { kunci: "nama",     label: "Nama Developer / Agensi", jenis: "teks" },
+      { kunci: "logoTeks", label: "Inisial Logo",            jenis: "teks", bantuan: "2 huruf, tampil di halaman depan" }
     ]
   },
   {
-    kunci: "kontak", label: "Kontak & WhatsApp", ikon: "💬", jenis: "grup",
+    kunci: "__identitas", label: "Identitas Perumahan", ikon: "🏡", jenis: "grupPerumahan", lingkup: "perumahan",
+    isi: [
+      { kunci: "nama",          label: "Nama Perumahan", jenis: "teks", wajib: true },
+      { kunci: "tagline",       label: "Slogan",         jenis: "teks" },
+      { kunci: "logoTeks",      label: "Inisial Logo",   jenis: "teks", bantuan: "2 huruf, mis. GH" },
+      { kunci: "lokasiSingkat", label: "Kota",           jenis: "teks", bantuan: "Tampil di bar paling atas" },
+      { kunci: "slug",          label: "Alamat Halaman", jenis: "teks", wajib: true,
+        bantuan: "Bagian akhir alamat website, mis. grand-harmoni-residence. Huruf kecil, tanpa spasi. JANGAN diubah kalau link sudah tersebar.",
+        pola: "^[a-z0-9]+(-[a-z0-9]+)*$", pesanSalah: "Hanya huruf kecil, angka, dan tanda hubung." }
+    ]
+  },
+  {
+    kunci: "kontak", label: "Kontak & WhatsApp", ikon: "💬", jenis: "grup", lingkup: "bersama",
     isi: [
       { kunci: "whatsapp",  label: "Nomor WhatsApp", jenis: "teks", wajib: true,
         bantuan: "Diawali 62, tanpa tanda + dan tanpa 0. Contoh: 62895634938872",
@@ -36,7 +48,7 @@ window.SKEMA = [
     ]
   },
   {
-    kunci: "pesanWa", label: "Pesan Otomatis WhatsApp", ikon: "✉️", jenis: "grup",
+    kunci: "pesanWa", label: "Pesan Otomatis WhatsApp", ikon: "✉️", jenis: "grup", lingkup: "bersama",
     catatan: "Pesan yang sudah terisi otomatis saat calon pembeli menekan tombol WhatsApp.",
     isi: [
       { kunci: "umum",   label: "Tombol umum",        jenis: "panjang" },
@@ -46,7 +58,7 @@ window.SKEMA = [
     ]
   },
   {
-    kunci: "hero", label: "Tampilan Paling Atas", ikon: "⭐", jenis: "grup",
+    lingkup: "perumahan", kunci: "hero", label: "Tampilan Paling Atas", ikon: "⭐", jenis: "grup",
     isi: [
       { kunci: "label",     label: "Label kecil",         jenis: "teks" },
       { kunci: "judul1",    label: "Judul baris 1",       jenis: "teks" },
@@ -61,10 +73,10 @@ window.SKEMA = [
         ] }
     ]
   },
-  { kunci: "trustBadges", label: "Baris Kepercayaan", ikon: "✅", jenis: "daftarTeks",
+  { lingkup: "perumahan", kunci: "trustBadges", label: "Baris Kepercayaan", ikon: "✅", jenis: "daftarTeks",
     catatan: "Tulisan pendek yang berjajar di bawah tombol utama." },
   {
-    kunci: "keunggulan", label: "Keunggulan", ikon: "💎", jenis: "daftar", ringkas: "judul",
+    lingkup: "perumahan", kunci: "keunggulan", label: "Keunggulan", ikon: "💎", jenis: "daftar", ringkas: "judul",
     isi: [
       { kunci: "ikon",  label: "Ikon", jenis: "pilihan",
         pilihan: ["shield","road","leaf","lock","wallet","building","home","clock","pin","check"] },
@@ -73,7 +85,7 @@ window.SKEMA = [
     ]
   },
   {
-    kunci: "unit", label: "Tipe Unit & Harga", ikon: "🏘️", jenis: "daftar", ringkas: "nama",
+    lingkup: "perumahan", kunci: "unit", label: "Tipe Unit & Harga", ikon: "🏘️", jenis: "daftar", ringkas: "nama",
     isi: [
       { kunci: "nama",      label: "Nama Tipe", jenis: "teks", wajib: true },
       { kunci: "kategori",  label: "Kategori",  jenis: "pilihan", pilihan: ["Subsidi","Komersil","Premium","Ruko"] },
@@ -95,7 +107,7 @@ window.SKEMA = [
     ]
   },
   {
-    kunci: "youtube", label: "Video YouTube", ikon: "▶️", jenis: "daftar", ringkas: "judul",
+    lingkup: "perumahan", kunci: "youtube", label: "Video YouTube", ikon: "▶️", jenis: "daftar", ringkas: "judul",
     isi: [
       { kunci: "link",   label: "Link Video", jenis: "teks", bantuan: "Tempel link apa adanya, mis. https://youtu.be/xxxx" },
       { kunci: "judul",  label: "Judul Kartu", jenis: "teks" },
@@ -103,7 +115,7 @@ window.SKEMA = [
     ]
   },
   {
-    kunci: "tiktok", label: "Video TikTok", ikon: "🎵", jenis: "daftar", ringkas: "judul",
+    lingkup: "perumahan", kunci: "tiktok", label: "Video TikTok", ikon: "🎵", jenis: "daftar", ringkas: "judul",
     catatan: "Pakai link panjang yang memuat /video/ atau /photo/. Link pendek vt.tiktok.com tidak bisa diputar di halaman.",
     isi: [
       { kunci: "link",   label: "Link Video", jenis: "teks" },
@@ -112,7 +124,7 @@ window.SKEMA = [
     ]
   },
   {
-    kunci: "lokasi", label: "Lokasi & Peta", ikon: "📍", jenis: "grup",
+    lingkup: "perumahan", kunci: "lokasi", label: "Lokasi & Peta", ikon: "📍", jenis: "grup",
     isi: [
       { kunci: "embedMaps", label: "Alamat Peta", jenis: "panjang",
         bantuan: "Google Maps → Share → Embed a map → salin isi src" },
@@ -125,7 +137,7 @@ window.SKEMA = [
     ]
   },
   {
-    kunci: "kpr", label: "Kalkulator KPR", ikon: "🧮", jenis: "grup",
+    lingkup: "perumahan", kunci: "kpr", label: "Kalkulator KPR", ikon: "🧮", jenis: "grup",
     catatan: "Nilai awal yang tampil sebelum pengunjung menggeser sendiri.",
     isi: [
       { kunci: "dpPersen",    label: "DP (%)",            jenis: "angka" },
@@ -134,7 +146,7 @@ window.SKEMA = [
     ]
   },
   {
-    kunci: "testimoni", label: "Testimoni", ikon: "💬", jenis: "daftar", ringkas: "nama",
+    lingkup: "perumahan", kunci: "testimoni", label: "Testimoni", ikon: "💬", jenis: "daftar", ringkas: "nama",
     isi: [
       { kunci: "nama", label: "Nama",       jenis: "teks" },
       { kunci: "info", label: "Keterangan", jenis: "teks", bantuan: "mis. Pembeli Tipe Melati" },
@@ -142,14 +154,14 @@ window.SKEMA = [
     ]
   },
   {
-    kunci: "faq", label: "Tanya Jawab", ikon: "❓", jenis: "daftar", ringkas: "t",
+    lingkup: "perumahan", kunci: "faq", label: "Tanya Jawab", ikon: "❓", jenis: "daftar", ringkas: "t",
     isi: [
       { kunci: "t", label: "Pertanyaan", jenis: "teks" },
       { kunci: "j", label: "Jawaban",    jenis: "panjang" }
     ]
   },
   {
-    kunci: "promo", label: "Promo", ikon: "🎁", jenis: "grup",
+    lingkup: "perumahan", kunci: "promo", label: "Promo", ikon: "🎁", jenis: "grup",
     isi: [
       { kunci: "judul",   label: "Judul Promo",   jenis: "teks" },
       { kunci: "daftar",  label: "Daftar Promo",  jenis: "daftarTeks" },

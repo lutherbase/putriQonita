@@ -258,6 +258,45 @@ WhatsApp, tampilan atas, keunggulan, tipe unit, video YouTube & TikTok, lokasi,
 kalkulator KPR, testimoni, tanya jawab, dan promo. Foto bisa diunggah langsung
 dari HP atau laptop.
 
+## Banyak perumahan dalam satu website
+
+Website ini menampung berapa pun perumahan. Bentuknya:
+
+```
+/                          -> halaman depan, daftar semua perumahan
+/p/grand-harmoni-residence -> halaman lengkap satu perumahan
+/p/griya-asri-cilodong     -> perumahan berikutnya, dan seterusnya
+```
+
+Tiap perumahan punya **alamatnya sendiri** — bisa dikirim langsung ke calon
+pembeli lewat WhatsApp, dan dibaca Google sebagai halaman terpisah sehingga
+lebih mungkin muncul saat orang mencari nama perumahan itu.
+
+### Yang dipakai bersama vs milik masing-masing
+
+| Dipakai bersama semua perumahan | Milik masing-masing perumahan |
+|---|---|
+| Nomor WhatsApp, nama & foto Anda | Nama, slogan, kota, alamat halaman |
+| Jabatan, jam kerja, email | Tipe unit & harga |
+| Nama developer / agensi | Video YouTube & TikTok |
+| Instagram, TikTok, YouTube | Lokasi, peta, akses sekitar |
+| Pesan otomatis WhatsApp | Keunggulan, promo, testimoni, FAQ |
+|  | Nilai awal kalkulator KPR |
+
+Jadi menambah perumahan baru tidak perlu mengetik ulang data Anda.
+
+### Menambah perumahan
+
+Di menu admin, bar atas ada pemilih **Perumahan**. Tekan **+ Baru**, isi
+namanya, lalu isi kelompok-kelompok datanya. Alamat halaman (slug) dibuatkan
+otomatis dari nama, mis. "Griya Asri Cilodong" jadi `griya-asri-cilodong`.
+
+**Jangan mengubah alamat halaman setelah link tersebar** — link lama akan mati.
+
+Menu yang bertanda milik perumahan mengikuti perumahan yang sedang dipilih di
+bar atas. Menu "Identitas Anda", "Kontak & WhatsApp", dan "Pesan Otomatis
+WhatsApp" berlaku untuk semuanya.
+
 ## Menambah orang yang boleh masuk
 
 Di menu admin, yang diketik cukup **nama pengguna** — misalnya `putri`, bukan

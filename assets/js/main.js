@@ -14,6 +14,15 @@
 
   const $  = (s, c) => (c || document).querySelector(s);
   const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+  /* Halaman perumahan dilayani di alamat /p/<nama>, sehingga rujukan berkas
+     yang relatif ("assets/img/x.jpg") akan salah arah. Fungsi ini membuatnya
+     mutlak. Alamat lengkap (http…) dan gambar tertanam (data:) dibiarkan. */
+  const aset = (v) => {
+    const t = String(v == null ? "" : v).trim();
+    if (!t || /^(https?:|data:|\/)/.test(t)) return t;
+    return "/" + t.replace(/^\.?\//, "");
+  };
+
   const esc = (s) => String(s == null ? "" : s)
     .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
@@ -111,12 +120,12 @@
 
     set("heroLabel", h.label); set("heroJudul1", h.judul1); set("heroJudul2", h.judul2);
     set("heroDesc", h.deskripsi);
-    set("heroImg", h.gambar, "src");
+    set("heroImg", aset(h.gambar), "src");
 
     set("agenNama", k.namaAgen); set("agenNama2", k.namaAgen);
     set("agenJabatan", k.jabatan); set("agenJabatan2", k.jabatan);
     $$('[data-i="agenFoto"],[data-i="agenFoto2"]').forEach((el) => {
-      el.style.backgroundImage = "url('" + k.fotoAgen + "')";
+      el.style.backgroundImage = "url('" + aset(k.fotoAgen) + "')";
     });
 
     set("promoJudul", SITE.promo.judul);
@@ -186,7 +195,7 @@
     $("#unit-grid").innerHTML = daftar.map(({ u, i }) => `
       <article class="card reveal" data-idx="${i}" style="transition-delay:${(i % 3) * 70}ms" tabindex="0">
         <div class="card__media">
-          <img src="${esc(u.gambar)}" alt="${esc(u.nama)}" loading="lazy">
+          <img src="${esc(aset(u.gambar))}" alt="${esc(u.nama)}" loading="lazy">
           <div class="card__tags">
             ${u.badge ? `<span class="badge badge--gold">${esc(u.badge)}</span>` : ""}
             <span class="badge ${/ready/i.test(u.status) ? "badge--ready" : ""}">${esc(u.status)}</span>
@@ -368,12 +377,12 @@
       const data = [
         kode ? `data-tt="${esc(kode)}"` : (alamat ? `data-buka="${esc(alamat)}"` : ""),
         alamat ? `data-url="${esc(alamat)}"` : "",
-        v.sampul ? `data-sampul="${esc(v.sampul)}"` : "",
+        v.sampul ? `data-sampul="${esc(aset(v.sampul))}"` : "",
         v.video ? `data-video="${esc(v.video)}"` : ""
       ].filter(Boolean).join(" ");
       if (!kode && !alamat) peringatanLink("TikTok", v);
       const gambar = v.sampul
-        ? `<img src="${esc(v.sampul)}" alt="" loading="lazy" decoding="async">`
+        ? `<img src="${esc(aset(v.sampul))}" alt="" loading="lazy" decoding="async">`
         : "";
       return `
       <div class="tt reveal${v.sampul ? " tt--bersampul" : ""}" ${data}>
@@ -812,10 +821,49 @@
     return r.json();
   }
 
+  /* Menentukan perumahan mana yang sedang dibuka, dari alamat halaman:
+       /p/grand-harmoni-residence   ->  "grand-harmoni-residence"
+     Kalau tidak disebut, dipakai perumahan pertama. */
+  function slugDariAlamat() {
+    const m = /\/p\/([^/?#]+)/.exec(location.pathname);
+    if (m) return decodeURIComponent(m[1]);
+    const q = new URLSearchParams(location.search).get("p");
+    return q || null;
+  }
+
+  /* Menggabungkan data bersama (kontak, pesan WA) dengan data satu perumahan,
+     supaya seluruh bagian halaman di bawah ini tidak perlu tahu bahwa
+     perumahannya lebih dari satu. */
+  function rakitSitus(semua, slug) {
+    const daftar = semua.perumahan || [];
+    if (!daftar.length) throw new Error("Belum ada perumahan yang diisi.");
+
+    const p = (slug && daftar.find((x) => x.slug === slug)) || daftar[0];
+    if (slug && !daftar.some((x) => x.slug === slug)) {
+      console.warn('[DATA] Perumahan "' + slug + '" tidak ditemukan, menampilkan yang pertama.');
+    }
+
+    return Object.assign({}, p, {
+      brand: {
+        nama: p.nama,
+        tagline: p.tagline,
+        developer: (semua.developer && semua.developer.nama) || "",
+        logoTeks: p.logoTeks,
+        lokasiSingkat: p.lokasiSingkat
+      },
+      kontak: semua.kontak,
+      pesanWa: semua.pesanWa,
+      _semua: semua,
+      _slug: p.slug
+    });
+  }
+
   async function mulai() {
+    let semua;
     try {
-      SITE = await ambilDariDatabase();
-      if (!SITE) SITE = await ambilCadangan();
+      semua = await ambilDariDatabase();
+      if (!semua) semua = await ambilCadangan();
+      SITE = rakitSitus(semua, slugDariAlamat());
     } catch (e) {
       gagalMuat(e.message);
       return;

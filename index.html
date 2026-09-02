@@ -1,40 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Grand Harmoni Residence — Perumahan Modern di Depok | Cicilan Mulai 3 Jutaan</title>
-<meta name="description" content="Perumahan Grand Harmoni Residence Depok. Legalitas SHM, bebas banjir, 10 menit ke pintu tol. Rumah tipe 36 sampai 90, cicilan mulai Rp 1,8 juta per bulan. Hubungi via WhatsApp sekarang.">
-<meta name="keywords" content="perumahan depok, rumah dijual depok, KPR subsidi, rumah murah depok, cluster depok, rumah grand depok city">
-<meta name="theme-color" content="#0d1f2d">
-<link rel="canonical" href="https://www.contoh-domain-anda.id/">
-
-<!-- Open Graph / share ke WhatsApp & Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Grand Harmoni Residence — Hunian Modern di Jantung Kota">
-<meta property="og:description" content="Legalitas SHM, bebas banjir, 10 menit ke pintu tol. Cicilan mulai 3 jutaan per bulan.">
-<meta property="og:image" content="assets/img/hero.svg">
-<meta property="og:locale" content="id_ID">
-<meta name="twitter:card" content="summary_large_image">
-
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<title>Perumahan yang Kami Pasarkan</title>
+<meta name="description" content="Daftar perumahan yang kami pasarkan di Depok dan sekitarnya. Lihat tipe unit, harga, dan simulasi KPR, lalu konsultasi langsung via WhatsApp.">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<!-- Angka ?v= di bawah ini = nomor versi. Setiap kali Anda mengubah
-     data/site.json atau style.css, naikkan angkanya (v=2, v=3, ...) supaya pengunjung
-     lama langsung melihat versi terbaru, bukan versi tersimpan di HP mereka. -->
-<link rel="stylesheet" href="assets/css/style.css?v=12">
+<link rel="stylesheet" href="/assets/css/style.css?v=13">
 </head>
 <body>
 
-<a href="#unit" class="skip-link">Lompat ke katalog unit</a>
-
-<!-- ============================ TOPBAR ============================ -->
 <div class="topbar">
   <div class="wrap topbar__in">
-    <span class="topbar__item" data-i="lokasi"></span>
-    <span class="topbar__sep"></span>
     <span class="topbar__item" data-i="jam"></span>
     <div class="topbar__right">
       <a class="topbar__link" data-i="telp" href="#"></a>
@@ -43,400 +23,74 @@
   </div>
 </div>
 
-<!-- ============================ HEADER ============================ -->
 <header class="nav" id="nav">
   <div class="wrap nav__in">
-    <a href="#top" class="brand">
+    <a href="/" class="brand">
       <span class="brand__mark" data-i="logo"></span>
       <span class="brand__txt">
-        <strong data-i="brandNama"></strong>
-        <small data-i="brandTag"></small>
+        <strong data-i="devNama"></strong>
+        <small>Pemasaran Properti</small>
       </span>
     </a>
-
     <nav class="nav__menu" id="menu">
-      <a href="#keunggulan">Keunggulan</a>
-      <a href="#unit">Tipe Unit</a>
-      <a href="#video">Video</a>
-      <a href="#tiktok">TikTok</a>
-      <a href="#lokasi">Lokasi</a>
-      <a href="#kpr">Simulasi KPR</a>
-      <a href="#faq">FAQ</a>
+      <a href="#daftar">Perumahan</a>
       <a class="btn btn--wa btn--sm nav__cta" data-wa="umum" href="#">
         <svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg> Chat WhatsApp
       </a>
     </nav>
-
     <button class="burger" id="burger" aria-label="Buka menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<main id="top">
-
-<!-- ============================ HERO ============================ -->
-<section class="hero">
-  <div class="hero__bg" aria-hidden="true"></div>
-  <div class="wrap hero__in">
-    <div class="hero__copy">
-      <span class="pill" data-i="heroLabel"></span>
-      <h1 class="hero__title">
-        <span data-i="heroJudul1"></span>
-        <em data-i="heroJudul2"></em>
-      </h1>
-      <p class="hero__desc" data-i="heroDesc"></p>
-      <div class="hero__cta">
-        <a class="btn btn--wa btn--lg" data-wa="umum" href="#">
-          <svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg>
-          Konsultasi Gratis via WhatsApp
+<main>
+  <section class="beranda-hero">
+    <div class="wrap beranda-hero__in">
+      <span class="pill" id="jumlahLabel"></span>
+      <h1>Cari Rumah? <em>Mulai Dari Sini.</em></h1>
+      <p id="beranda-teks"></p>
+      <div class="beranda-hero__aksi">
+        <a class="btn btn--wa" data-wa="umum" href="#">
+          <svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg> Konsultasi Gratis via WhatsApp
         </a>
-        <a class="btn btn--ghost btn--lg" href="#unit">Lihat Tipe Unit</a>
+        <a class="btn btn--ghost" href="#daftar">Lihat Perumahan</a>
       </div>
-      <div class="hero__mini">
-        <div class="avatar" data-i="agenFoto"></div>
+      <div class="beranda-agen">
+        <span class="beranda-agen__foto" data-i="agenFoto"></span>
         <div>
           <strong data-i="agenNama"></strong>
-          <span data-i="agenJabatan"></span>
-        </div>
-        <span class="dot-online" title="Online"></span>
-        <span class="mini-online">Online sekarang</span>
-      </div>
-    </div>
-
-    <div class="hero__media">
-      <figure class="hero__img"><img data-i="heroImg" src="" alt="Tampak depan rumah contoh Grand Harmoni Residence" loading="eager"></figure>
-      <div class="hero__card">
-        <span class="hero__card-label">Cicilan mulai</span>
-        <strong class="hero__card-val">Rp 1,8 Jt<small>/bulan</small></strong>
-        <span class="hero__card-note">Tenor 20 tahun, DP 10%</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <ul class="stats" id="stats"></ul>
-  </div>
-</section>
-
-<!-- ============================ TRUST ============================ -->
-<div class="trust"><div class="trust__track" id="trust"></div></div>
-
-<!-- ============================ KEUNGGULAN ============================ -->
-<section class="sec" id="keunggulan">
-  <div class="wrap">
-    <div class="sec__head reveal">
-      <span class="eyebrow">Kenapa Memilih Kami</span>
-      <h2 class="sec__title">Lebih Dari Sekadar Rumah,<br><em>Ini Investasi Masa Depan</em></h2>
-      <p class="sec__sub">Setiap detail kami rancang untuk kenyamanan jangka panjang keluarga Anda — dari legalitas yang bersih sampai lingkungan yang tumbuh nilainya setiap tahun.</p>
-    </div>
-    <div class="grid-3" id="keunggulan-grid"></div>
-  </div>
-</section>
-
-<!-- ============================ UNIT ============================ -->
-<section class="sec sec--alt" id="unit">
-  <div class="wrap">
-    <div class="sec__head reveal">
-      <span class="eyebrow">Katalog Unit</span>
-      <h2 class="sec__title">Pilih Tipe yang <em>Paling Pas</em> Untuk Anda</h2>
-      <p class="sec__sub">Tersedia unit ready stock dan indent. Klik unit mana pun untuk melihat spesifikasi lengkap, atau langsung tanya ketersediaannya lewat WhatsApp.</p>
-    </div>
-    <div class="filters" id="filters"></div>
-    <div class="grid-3" id="unit-grid"></div>
-    <p class="note">Harga dapat berubah sewaktu-waktu mengikuti tahapan pembangunan. Hubungi kami untuk daftar harga terbaru.</p>
-  </div>
-</section>
-
-<!-- ============================ YOUTUBE ============================ -->
-<section class="sec sec--dark" id="video">
-  <div class="wrap">
-    <div class="sec__head sec__head--light reveal">
-      <span class="eyebrow">Galeri Video</span>
-      <h2 class="sec__title">Keliling Kawasan <em>Tanpa Keluar Rumah</em></h2>
-      <p class="sec__sub">House tour, progres pembangunan, sampai panduan KPR — semuanya kami rekam apa adanya.</p>
-    </div>
-    <div class="yt-grid" id="yt-grid"></div>
-    <div class="sec__foot">
-      <a class="btn btn--ghost btn--light" data-i="ytProfil" href="#" target="_blank" rel="noopener">Lihat Semua Video di YouTube</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ TIKTOK ============================ -->
-<section class="sec" id="tiktok">
-  <div class="wrap">
-    <div class="sec__head reveal">
-      <span class="eyebrow">TikTok</span>
-      <h2 class="sec__title">Update Harian di <em>TikTok Kami</em></h2>
-      <p class="sec__sub">Konten singkat seputar tips beli rumah, unboxing unit, dan momen serah terima penghuni baru.</p>
-    </div>
-    <div class="tt-grid" id="tt-grid"></div>
-    <div class="sec__foot">
-      <a class="btn btn--dark" data-i="ttProfil" href="#" target="_blank" rel="noopener">Follow TikTok Kami</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ LOKASI ============================ -->
-<section class="sec sec--alt" id="lokasi">
-  <div class="wrap">
-    <div class="sec__head reveal">
-      <span class="eyebrow">Lokasi</span>
-      <h2 class="sec__title">Semua Kebutuhan Harian <em>Dalam Radius 15 Menit</em></h2>
-    </div>
-    <div class="loc">
-      <div class="loc__map reveal"><div class="map-frame" id="map"></div></div>
-      <div class="loc__list reveal">
-        <h3>Akses & Fasilitas Sekitar</h3>
-        <ul id="sekitar"></ul>
-        <div class="loc__addr">
-          <strong>Alamat Kantor Pemasaran</strong>
-          <p data-i="alamat"></p>
-          <a class="btn btn--outline btn--sm" data-i="linkMaps" href="#" target="_blank" rel="noopener">Buka di Google Maps</a>
-          <a class="btn btn--wa btn--sm" data-wa="survei" href="#">
-            <svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg> Jadwalkan Survei
-          </a>
+          <small data-i="agenJabatan"></small>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============================ KPR ============================ -->
-<section class="sec" id="kpr">
-  <div class="wrap">
-    <div class="sec__head reveal">
-      <span class="eyebrow">Simulasi KPR</span>
-      <h2 class="sec__title">Hitung Angsuran Anda <em>Dalam 10 Detik</em></h2>
-      <p class="sec__sub">Geser dan sesuaikan. Hasil simulasi bisa langsung Anda kirim ke kami lewat WhatsApp untuk diproses.</p>
-    </div>
-
-    <div class="calc reveal">
-      <div class="calc__form">
-        <label class="field">
-          <span class="field__label">Pilih Unit</span>
-          <select id="c-unit" class="input"></select>
-        </label>
-
-        <label class="field">
-          <span class="field__label">Harga Rumah</span>
-          <div class="input input--money"><span>Rp</span><input id="c-harga" class="bare" type="text" inputmode="numeric"></div>
-        </label>
-
-        <label class="field">
-          <span class="field__label">Uang Muka (DP) <b id="c-dp-val">15%</b></span>
-          <input id="c-dp" class="range" type="range" min="5" max="50" step="1" value="15">
-          <span class="field__hint" id="c-dp-rp"></span>
-        </label>
-
-        <label class="field">
-          <span class="field__label">Jangka Waktu <b id="c-tenor-val">15 tahun</b></span>
-          <input id="c-tenor" class="range" type="range" min="1" max="30" step="1" value="15">
-        </label>
-
-        <label class="field">
-          <span class="field__label">Suku Bunga per Tahun <b id="c-bunga-val">7,5%</b></span>
-          <input id="c-bunga" class="range" type="range" min="1" max="18" step="0.1" value="7.5">
-          <span class="field__hint">Bunga fixed rata-rata bank rekanan. Angka final mengikuti persetujuan bank.</span>
-        </label>
+  <section class="sec" id="daftar">
+    <div class="wrap">
+      <div class="sec__head">
+        <span class="pill">Pilihan Hunian</span>
+        <h2 class="sec__title">Perumahan yang <em>Kami Pasarkan</em></h2>
       </div>
-
-      <div class="calc__out">
-        <span class="calc__label">Estimasi Angsuran per Bulan</span>
-        <strong class="calc__big" id="c-angsuran">Rp 0</strong>
-        <ul class="calc__rows">
-          <li><span>Uang muka</span><b id="c-o-dp">Rp 0</b></li>
-          <li><span>Pokok pinjaman</span><b id="c-o-pokok">Rp 0</b></li>
-          <li><span>Total bunga</span><b id="c-o-bunga">Rp 0</b></li>
-          <li><span>Total pembayaran</span><b id="c-o-total">Rp 0</b></li>
-        </ul>
-        <p class="calc__note">Perhitungan memakai metode anuitas dan bersifat estimasi. Angka resmi ditentukan oleh bank penerbit KPR.</p>
-        <a class="btn btn--wa btn--block" id="c-wa" href="#">
-          <svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg>
-          Kirim Simulasi Ini ke WhatsApp
-        </a>
-      </div>
+      <div class="pgrid" id="pgrid"></div>
     </div>
-  </div>
-</section>
-
-<!-- ============================ TESTIMONI ============================ -->
-<section class="sec sec--alt" id="testimoni">
-  <div class="wrap">
-    <div class="sec__head reveal">
-      <span class="eyebrow">Testimoni</span>
-      <h2 class="sec__title">Kata Mereka yang <em>Sudah Pindah</em></h2>
-    </div>
-    <div class="grid-2" id="testi-grid"></div>
-  </div>
-</section>
-
-<!-- ============================ PROMO ============================ -->
-<section class="promo">
-  <div class="wrap promo__in reveal">
-    <div>
-      <span class="eyebrow eyebrow--gold">Penawaran Terbatas</span>
-      <h2 class="promo__title" data-i="promoJudul"></h2>
-      <ul class="promo__list" id="promo-list"></ul>
-      <p class="promo__note" data-i="promoNote"></p>
-    </div>
-    <div class="promo__cta">
-      <p>Sisa kuota promo bulan ini</p>
-      <strong>7 <small>dari 20</small></strong>
-      <a class="btn btn--wa btn--lg btn--block" data-wa="umum" href="#">
-        <svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg> Amankan Promo Saya
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ FAQ ============================ -->
-<section class="sec" id="faq">
-  <div class="wrap wrap--narrow">
-    <div class="sec__head reveal">
-      <span class="eyebrow">FAQ</span>
-      <h2 class="sec__title">Pertanyaan yang <em>Paling Sering Ditanya</em></h2>
-    </div>
-    <div class="faq" id="faq-list"></div>
-  </div>
-</section>
-
-<!-- ============================ KONTAK ============================ -->
-<section class="sec sec--dark" id="kontak">
-  <div class="wrap">
-    <div class="contact">
-      <div class="contact__left reveal">
-        <span class="eyebrow">Hubungi Kami</span>
-        <h2 class="sec__title">Tanya Apa Saja,<br><em>Kami Balas Cepat</em></h2>
-        <p class="sec__sub">Isi form singkat ini — pesan otomatis tersusun rapi dan langsung terkirim ke WhatsApp kami. Tidak perlu menyimpan nomor terlebih dulu.</p>
-
-        <div class="agent">
-          <div class="avatar avatar--lg" data-i="agenFoto2"></div>
-          <div>
-            <strong data-i="agenNama2"></strong>
-            <span data-i="agenJabatan2"></span>
-            <a class="agent__wa" data-wa="umum" href="#">
-              <svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg> <span data-i="agenTelp"></span>
-            </a>
-          </div>
-        </div>
-
-        <ul class="contact__meta">
-          <li><svg class="ic" aria-hidden="true"><use href="#i-pin"></use></svg><span data-i="alamat2"></span></li>
-          <li><svg class="ic" aria-hidden="true"><use href="#i-clock"></use></svg><span data-i="jam2"></span></li>
-          <li><svg class="ic" aria-hidden="true"><use href="#i-mail"></use></svg><span data-i="email"></span></li>
-        </ul>
-      </div>
-
-      <form class="form reveal" id="form-wa" novalidate>
-        <h3 class="form__title">Kirim Pertanyaan</h3>
-        <label class="field">
-          <span class="field__label">Nama Lengkap</span>
-          <input class="input" id="f-nama" type="text" placeholder="Nama Anda" required>
-        </label>
-        <label class="field">
-          <span class="field__label">Nomor WhatsApp</span>
-          <input class="input" id="f-hp" type="tel" inputmode="tel" placeholder="0812xxxxxxxx" required>
-        </label>
-        <label class="field">
-          <span class="field__label">Unit yang Diminati</span>
-          <select class="input" id="f-unit"></select>
-        </label>
-        <label class="field">
-          <span class="field__label">Rencana Pembayaran</span>
-          <select class="input" id="f-bayar">
-            <option>KPR Bank</option><option>Cash Bertahap</option><option>Cash Keras</option><option>Belum menentukan</option>
-          </select>
-        </label>
-        <label class="field">
-          <span class="field__label">Pesan <small>(opsional)</small></span>
-          <textarea class="input" id="f-pesan" rows="3" placeholder="Contoh: minta brosur dan jadwal survei akhir pekan"></textarea>
-        </label>
-        <button class="btn btn--wa btn--block btn--lg" type="submit">
-          <svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg> Kirim via WhatsApp
-        </button>
-        <p class="form__note">Data Anda tidak kami simpan di server. Tombol ini hanya membuka aplikasi WhatsApp dengan pesan yang sudah terisi.</p>
-      </form>
-    </div>
-  </div>
-</section>
-
+  </section>
 </main>
 
-<!-- ============================ FOOTER ============================ -->
 <footer class="foot">
-  <div class="wrap foot__in">
-    <div class="foot__brand">
-      <span class="brand__mark" data-i="logo2"></span>
-      <strong data-i="brandNama2"></strong>
-      <p data-i="developer"></p>
-    </div>
-    <div class="foot__col">
-      <h4>Navigasi</h4>
-      <a href="#keunggulan">Keunggulan</a><a href="#unit">Tipe Unit</a>
-      <a href="#lokasi">Lokasi</a><a href="#kpr">Simulasi KPR</a><a href="#faq">FAQ</a>
-    </div>
-    <div class="foot__col">
-      <h4>Ikuti Kami</h4>
-      <a data-i="ig2" href="#" target="_blank" rel="noopener">Instagram</a>
-      <a data-i="ttProfil2" href="#" target="_blank" rel="noopener">TikTok</a>
-      <a data-i="ytProfil2" href="#" target="_blank" rel="noopener">YouTube</a>
-    </div>
-    <div class="foot__col">
-      <h4>Kontak</h4>
-      <a data-wa="umum" href="#" data-i="telp2"></a>
+  <div class="wrap">
+    <div class="foot__bawah">
+      <span>&copy; <span id="tahun"></span> <span data-i="devNama2"></span>. Seluruh hak cipta dilindungi.</span>
       <a data-i="email2" href="#"></a>
-      <span data-i="jam3"></span>
     </div>
-  </div>
-  <div class="wrap foot__bar">
-    <span>&copy; <span id="year"></span> <span data-i="brandNama3"></span>. Seluruh hak cipta dilindungi.</span>
-    <span>Gambar dan denah bersifat ilustrasi. Spesifikasi dapat berubah tanpa pemberitahuan sebelumnya.</span>
   </div>
 </footer>
 
-<!-- ============================ FLOATING ============================ -->
 <a class="fab" data-wa="umum" href="#" aria-label="Chat WhatsApp">
   <svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg>
-  <span class="fab__txt">Chat Sekarang</span>
+  <span>Chat Sekarang</span>
 </a>
-<button class="totop" id="totop" aria-label="Kembali ke atas">
-  <svg class="ic" aria-hidden="true"><use href="#i-up"></use></svg>
-</button>
 
-<!-- Bar aksi cepat untuk layar HP -->
-<div class="mobilebar">
-  <a href="#unit" class="mobilebar__b"><svg class="ic"><use href="#i-home"></use></svg><span>Tipe Unit</span></a>
-  <a href="#kpr" class="mobilebar__b"><svg class="ic"><use href="#i-calc"></use></svg><span>Simulasi</span></a>
-  <a data-wa="umum" href="#" class="mobilebar__b mobilebar__b--wa"><svg class="ic"><use href="#i-wa"></use></svg><span>WhatsApp</span></a>
-</div>
-
-<!-- ============================ MODAL UNIT ============================ -->
-<div class="modal" id="modal" hidden>
-  <div class="modal__bg" data-close></div>
-  <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="m-nama">
-    <button class="modal__x" data-close aria-label="Tutup">&times;</button>
-    <div class="modal__grid">
-      <div class="modal__media"><img id="m-img" src="" alt=""></div>
-      <div class="modal__body">
-        <span class="badge" id="m-status"></span>
-        <h3 id="m-nama"></h3>
-        <div class="modal__price"><strong id="m-harga"></strong><span id="m-cicilan"></span></div>
-        <ul class="specs" id="m-specs"></ul>
-        <h4>Spesifikasi Bangunan</h4>
-        <ul class="bullets" id="m-list"></ul>
-        <div class="modal__cta">
-          <a class="btn btn--wa btn--block" id="m-wa" href="#">
-            <svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg> Tanya Unit Ini via WhatsApp
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ============================ IKON ============================ -->
 <svg style="display:none" aria-hidden="true">
   <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42l-.47-.01c-.16 0-.43.06-.65.31-.22.24-.85.83-.85 2.03s.87 2.35.99 2.51c.12.16 1.71 2.62 4.15 3.67.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></symbol>
   <symbol id="i-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></symbol>
@@ -460,8 +114,7 @@
   <symbol id="i-quote" viewBox="0 0 24 24"><path fill="currentColor" d="M9 7H5a3 3 0 0 0-3 3v7h7v-7H6a3 3 0 0 1 3-3zm10 0h-4a3 3 0 0 0-3 3v7h7v-7h-3a3 3 0 0 1 3-3z"/></symbol>
 </svg>
 
-<script src="assets/js/koneksi.js?v=12"></script>
-<script src="assets/js/main.js?v=12"></script>
-
+<script src="/assets/js/koneksi.js?v=13"></script>
+<script src="/assets/js/beranda.js?v=13"></script>
 </body>
 </html>

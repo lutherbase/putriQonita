@@ -4,6 +4,14 @@
   publish = "."
   command = ""
 
+# Tiap perumahan punya alamatnya sendiri, mis. /p/grand-harmoni-residence
+# Semuanya dilayani oleh satu berkas perumahan.html, yang membaca nama
+# perumahan dari alamatnya. Status 200 = alamat di bilah browser tetap /p/...
+[[redirects]]
+  from = "/p/*"
+  to = "/perumahan.html"
+  status = 200
+
 # Menu admin jangan sampai terindeks Google
 [[headers]]
   for = "/admin/*"

@@ -113,3 +113,11 @@ button,input,textarea,select{font:inherit;color:inherit}
   .atas{padding:10px 12px}
   .atas__kanan{width:100%;justify-content:flex-end}
 }
+
+/* Pemilih perumahan di bar atas */
+.atas__pilih{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.atas__pilih label{font-size:12.5px;font-weight:700;color:var(--abu)}
+.atas__pilih select{padding:8px 11px;border:1px solid var(--garis);border-radius:9px;background:#fff;
+  font-weight:700;font-size:14px;max-width:230px}
+.atas__pilih select:focus{outline:0;border-color:var(--hijau);box-shadow:0 0 0 3px rgba(31,122,77,.13)}
+@media (max-width:860px){ .atas__pilih{width:100%;order:3} .atas__pilih select{flex:1} }
