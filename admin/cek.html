@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Pemeriksa Menu Admin</title>
+<style>
+  body{font-family:system-ui,sans-serif;max-width:760px;margin:0 auto;padding:24px;background:#f5f7f9;color:#0d1b24;line-height:1.6}
+  h1{font-size:20px;margin:0 0 4px} p.sub{color:#5d7280;margin:0 0 20px;font-size:14px}
+  .l{background:#fff;border:1px solid #e3e9ed;border-radius:10px;padding:12px 14px;margin-bottom:8px;
+     display:flex;gap:10px;align-items:flex-start;font-size:14px}
+  .t{flex:none;width:22px;font-size:16px} .k{flex:1;min-width:0;word-break:break-word}
+  .k b{display:block;margin-bottom:2px} .k span{color:#5d7280;font-size:13px}
+  .ok{border-left:4px solid #1f7a4d} .no{border-left:4px solid #c0392b} .tunggu{border-left:4px solid #c8a44a}
+  form{background:#fff;border:1px solid #e3e9ed;border-radius:10px;padding:16px;margin:18px 0}
+  input{width:100%;padding:10px 12px;border:1px solid #e3e9ed;border-radius:8px;margin-bottom:10px;font:inherit}
+  button{background:#1f7a4d;color:#fff;border:0;padding:11px 18px;border-radius:9px;font-weight:700;cursor:pointer;font:inherit}
+  a{color:#1f7a4d}
+</style>
+</head>
+<body>
+<h1>Pemeriksa Menu Admin</h1>
+<p class="sub">Halaman ini menguji tiap langkah satu per satu, lalu melaporkan di mana macetnya. Fotokan seluruh halaman ini.</p>
+<div id="hasil"></div>
+
+<form id="uji">
+  <b style="display:block;margin-bottom:10px">Uji masuk (isi seperti biasa)</b>
+  <input type="text" id="u" placeholder="nama pengguna, mis. putri" autocapitalize="none">
+  <input type="password" id="p" placeholder="kata sandi">
+  <button type="submit">Uji Sekarang</button>
+</form>
+
+<p><a href="./">← kembali ke menu admin</a></p>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../assets/js/koneksi.js?v=6"></script>
+<script>
+(function () {
+  const wadah = document.getElementById("hasil");
+  function lapor(judul, ok, ket) {
+    const d = document.createElement("div");
+    d.className = "l " + (ok === null ? "tunggu" : ok ? "ok" : "no");
+    d.innerHTML = '<div class="t">' + (ok === null ? "⏳" : ok ? "✅" : "❌") + '</div>' +
+                  '<div class="k"><b></b><span></span></div>';
+    d.querySelector("b").textContent = judul;
+    d.querySelector("span").textContent = ket || "";
+    wadah.appendChild(d);
+    return d;
+  }
+
+  lapor("Halaman pemeriksa termuat", true, "Berarti JavaScript tidak diblokir sepenuhnya.");
+  const adaPustaka = typeof window.supabase !== "undefined";
+  lapor("Pustaka Supabase termuat", adaPustaka,
+    adaPustaka ? "Diambil dari cdn.jsdelivr.net" : "GAGAL — cdn.jsdelivr.net kemungkinan diblokir pemblokir iklan atau jaringan.");
+
+  const adaKoneksi = !!(window.KONEKSI && window.KONEKSI.url && window.KONEKSI.kunci);
+  lapor("Berkas koneksi termuat", adaKoneksi, adaKoneksi ? window.KONEKSI.url : "GAGAL — koneksi.js tidak terbaca.");
+
+  if (!adaPustaka || !adaKoneksi) return;
+  const db = window.supabase.createClient(window.KONEKSI.url, window.KONEKSI.kunci);
+
+  (async function () {
+    // 1. baca tanpa login
+    try {
+      const r = await fetch(window.KONEKSI.url + "/rest/v1/site_config?select=data&id=eq.1",
+        { headers: { apikey: window.KONEKSI.kunci } });
+      const t = await r.text();
+      lapor("Membaca data tanpa login", r.ok, "HTTP " + r.status + ", " + t.length + " huruf diterima");
+    } catch (e) {
+      lapor("Membaca data tanpa login", false, "Permintaan diblokir: " + e.message);
+    }
+
+    // 2. sesi tersimpan
+    try {
+      const { data: d } = await db.auth.getSession();
+      lapor("Sesi tersimpan di browser", true,
+        d.session ? ("Ada, atas nama " + d.session.user.email) : "Tidak ada (wajar kalau belum pernah masuk)");
+    } catch (e) {
+      lapor("Sesi tersimpan di browser", false, e.message);
+    }
+
+    // 3. penyimpanan browser
+    try {
+      localStorage.setItem("__cek", "1"); localStorage.removeItem("__cek");
+      lapor("Penyimpanan browser (localStorage)", true, "Bisa ditulis. Sesi login akan tersimpan.");
+    } catch (e) {
+      lapor("Penyimpanan browser (localStorage)", false,
+        "DIBLOKIR — ini membuat login tidak bisa bertahan. Sebab umum: mode penyamaran ketat, atau pengaturan browser memblokir cookie/penyimpanan situs. Pesan: " + e.message);
+    }
+  })();
+
+  document.getElementById("uji").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const nama = document.getElementById("u").value.trim().toLowerCase();
+    const email = nama.includes("@") ? nama : nama + "@akun.local";
+    const baris = lapor("Mencoba masuk sebagai " + email, null, "sedang diproses…");
+
+    let sesi = null;
+    try {
+      const { data: h, error } = await db.auth.signInWithPassword({ email: email, password: document.getElementById("p").value });
+      if (error) {
+        baris.className = "l no";
+        baris.querySelector(".t").textContent = "❌";
+        baris.querySelector("span").textContent = "DITOLAK: " + error.message;
+        return;
+      }
+      sesi = h.session;
+      baris.className = "l ok";
+      baris.querySelector(".t").textContent = "✅";
+      baris.querySelector("span").textContent = "Berhasil. Kata sandi benar.";
+    } catch (err) {
+      baris.className = "l no";
+      baris.querySelector(".t").textContent = "❌";
+      baris.querySelector("span").textContent = "Galat: " + err.message;
+      return;
+    }
+
+    try {
+      const { data: b, error } = await db.from("site_config").select("data, updated_at").eq("id", 1).single();
+      if (error) { lapor("Mengambil isi website setelah masuk", false, error.message + " | kode: " + (error.code || "-")); return; }
+      lapor("Mengambil isi website setelah masuk", true,
+        "Berhasil. Nama perumahan: " + (b.data && b.data.brand && b.data.brand.nama));
+      lapor("Menyiapkan tampilan", true, "Semua langkah lolos — menu admin seharusnya bisa dibuka.");
+    } catch (err) {
+      lapor("Mengambil isi website setelah masuk", false, "Galat: " + err.message);
+    }
+  });
+
+  window.addEventListener("error", (e) => lapor("Galat skrip tertangkap", false,
+    e.message + " (" + String(e.filename).split("/").pop() + " baris " + e.lineno + ")"));
+})();
+</script>
+</body>
+</html>
