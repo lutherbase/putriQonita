@@ -291,7 +291,12 @@ html.terkunci{overflow:hidden}
 .lb__tirai{position:absolute;inset:0;background:rgba(4,12,20,.82);backdrop-filter:blur(8px);
   opacity:0;transition:opacity .3s var(--ease)}
 .lb.is-in .lb__tirai{opacity:1}
-.lb__kotak{position:relative;z-index:1;width:min(94vw,340px);height:min(86vh,760px);
+.lb__bungkus{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:12px}
+.lb__buka{color:rgba(255,255,255,.9);font-size:13.5px;font-weight:700;text-decoration:none;
+  background:rgba(255,255,255,.12);padding:9px 16px;border-radius:999px;backdrop-filter:blur(6px);
+  transition:background .25s var(--ease)}
+.lb__buka:hover{background:rgba(255,255,255,.24)}
+.lb__kotak{position:relative;width:min(94vw,340px);height:min(84vh,780px);min-height:420px;
   border-radius:var(--r-lg);overflow:hidden;background:#000;box-shadow:0 30px 80px -20px rgba(0,0,0,.8);
   opacity:0;transform:translateY(14px) scale(.98);transition:opacity .32s var(--ease),transform .32s var(--ease)}
 .lb.is-in .lb__kotak{opacity:1;transform:none}

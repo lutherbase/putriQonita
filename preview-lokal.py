@@ -29,12 +29,16 @@ class Penangan(http.server.SimpleHTTPRequestHandler):
         super().end_headers()
 
     def translate_path(self, path):
-        # Meniru aturan Netlify: /p/<nama-perumahan> dilayani oleh perumahan.html
+        # Meniru aturan Netlify: alamat yang bukan berkas sungguhan
+        # (mis. /grand-harmoni-residence) dilayani oleh perumahan.html,
         # supaya tampilan di komputer sendiri sama persis dengan yang online.
-        bersih = path.split("?", 1)[0].split("#", 1)[0]
-        if bersih.startswith("/p/"):
+        asli = super().translate_path(path)
+        if os.path.exists(asli):
+            return asli
+        bersih = path.split("?", 1)[0].split("#", 1)[0].strip("/")
+        if bersih and "." not in bersih.split("/")[-1]:
             return os.path.join(FOLDER, "perumahan.html")
-        return super().translate_path(path)
+        return asli
 
     def log_message(self, format, *args):        # tampilkan lebih ringkas
         print("  " + format % args)

@@ -101,20 +101,20 @@
       const gambarUtama = aset((p.hero && p.hero.gambar) || "");
       return `
       <article class="pcard">
-        <a class="pcard__gbr" href="/p/${encodeURIComponent(p.slug)}">
+        <a class="pcard__gbr" href="/${encodeURIComponent(p.slug)}">
           ${gambarUtama ? `<img src="${esc(gambarUtama)}" alt="${esc(p.nama)}" loading="lazy">` : ""}
           ${adaReady(p) ? '<span class="badge badge--ready pcard__badge">Ready Stock</span>' : ""}
         </a>
         <div class="pcard__isi">
           <span class="pcard__lokasi">📍 ${esc(p.lokasiSingkat || "")}</span>
-          <h3><a href="/p/${encodeURIComponent(p.slug)}">${esc(p.nama)}</a></h3>
+          <h3><a href="/${encodeURIComponent(p.slug)}">${esc(p.nama)}</a></h3>
           <p>${esc(p.tagline || "")}</p>
           <div class="pcard__data">
             ${harga ? `<div><small>Mulai dari</small><strong>${esc(harga)}</strong></div>` : ""}
             <div><small>Pilihan tipe</small><strong>${jumlahTipe} tipe</strong></div>
           </div>
           <div class="pcard__aksi">
-            <a class="btn btn--primary btn--sm" href="/p/${encodeURIComponent(p.slug)}">Lihat Detail</a>
+            <a class="btn btn--primary btn--sm" href="/${encodeURIComponent(p.slug)}">Lihat Detail</a>
             <a class="btn btn--wa btn--sm" target="_blank" rel="noopener"
                href="${esc(linkWa(pesanPerumahan(p)))}">
               <svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg> Tanya

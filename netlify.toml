@@ -4,11 +4,20 @@
   publish = "."
   command = ""
 
-# Tiap perumahan punya alamatnya sendiri, mis. /p/grand-harmoni-residence
-# Semuanya dilayani oleh satu berkas perumahan.html, yang membaca nama
-# perumahan dari alamatnya. Status 200 = alamat di bilah browser tetap /p/...
+# Alamat lama /p/<nama> dialihkan ke alamat baru /<nama>,
+# supaya link yang terlanjur tersebar tidak mati.
 [[redirects]]
   from = "/p/*"
+  to = "/:splat"
+  status = 301
+
+# Tiap perumahan punya alamatnya sendiri langsung di akar, mis.
+#   putriqonita.netlify.app/grand-harmoni-residence
+# Semuanya dilayani satu berkas perumahan.html yang membaca nama perumahan
+# dari alamatnya. Aturan ini TIDAK dipaksa (tanpa force), jadi berkas yang
+# benar-benar ada — /admin/, /assets/, /data/ — tetap dilayani lebih dulu.
+[[redirects]]
+  from = "/*"
   to = "/perumahan.html"
   status = 200
 

@@ -264,9 +264,12 @@ Website ini menampung berapa pun perumahan. Bentuknya:
 
 ```
 /                          -> halaman depan, daftar semua perumahan
-/p/grand-harmoni-residence -> halaman lengkap satu perumahan
-/p/griya-asri-cilodong     -> perumahan berikutnya, dan seterusnya
+/grand-harmoni-residence   -> halaman lengkap satu perumahan
+/griya-asri-cilodong       -> perumahan berikutnya, dan seterusnya
 ```
+
+Alamat lama `/p/<nama>` otomatis dialihkan ke alamat baru, jadi link yang
+terlanjur tersebar tidak mati.
 
 Tiap perumahan punya **alamatnya sendiri** — bisa dikirim langsung ke calon
 pembeli lewat WhatsApp, dan dibaca Google sebagai halaman terpisah sehingga

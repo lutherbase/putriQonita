@@ -429,9 +429,14 @@
     layar.hidden = true;
     layar.innerHTML = `
       <div class="lb__tirai" data-tutup></div>
-      <div class="lb__kotak" role="dialog" aria-modal="true" aria-label="Video TikTok">
-        <button class="lb__tutup" type="button" aria-label="Tutup video" data-tutup>&times;</button>
-        <div class="lb__isi"></div>
+      <div class="lb__bungkus">
+        <div class="lb__kotak" role="dialog" aria-modal="true" aria-label="Video TikTok">
+          <button class="lb__tutup" type="button" aria-label="Tutup video" data-tutup>&times;</button>
+          <div class="lb__isi"></div>
+        </div>
+        <a class="lb__buka" target="_blank" rel="noopener" hidden>
+          Videonya tidak mau jalan di sini? Tonton di TikTok →
+        </a>
       </div>`;
     document.body.appendChild(layar);
     const isiLayar = layar.querySelector(".lb__isi");
@@ -459,6 +464,15 @@
           title="Video TikTok" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen
           referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
       }
+      /* Sebagian video tidak boleh diputar di luar TikTok — biasanya karena
+         musiknya berlisensi. Tautan ini jadi jalan keluarnya. */
+      const buka = layar.querySelector(".lb__buka");
+      const alamat = box.dataset.url || (box.dataset.tt
+        ? "https://www.tiktok.com/@" + encodeURIComponent(String((SITE.kontak.tiktokProfil || "").split("@").pop() || "").split(/[?/]/)[0]) + "/video/" + box.dataset.tt
+        : "");
+      if (alamat && !box.dataset.video) { buka.href = alamat; buka.hidden = false; }
+      else { buka.hidden = true; }
+
       layar.hidden = false;
       document.documentElement.classList.add("terkunci");
       requestAnimationFrame(() => layar.classList.add("is-in"));
@@ -822,13 +836,19 @@
   }
 
   /* Menentukan perumahan mana yang sedang dibuka, dari alamat halaman:
-       /p/grand-harmoni-residence   ->  "grand-harmoni-residence"
-     Kalau tidak disebut, dipakai perumahan pertama. */
+       /grand-harmoni-residence  ->  "grand-harmoni-residence"
+     Nama-nama di bawah ini milik website itu sendiri, bukan nama perumahan. */
+  const BUKAN_PERUMAHAN = ["admin", "assets", "data", "p", "index.html", "perumahan.html",
+                           "robots.txt", "netlify.toml", "favicon.ico"];
+
   function slugDariAlamat() {
-    const m = /\/p\/([^/?#]+)/.exec(location.pathname);
-    if (m) return decodeURIComponent(m[1]);
-    const q = new URLSearchParams(location.search).get("p");
-    return q || null;
+    const bagian = location.pathname.split("/").filter(Boolean);
+    let s = bagian[0] ? decodeURIComponent(bagian[0]) : null;
+    if (s === "p" && bagian[1]) s = decodeURIComponent(bagian[1]);   // alamat lama /p/<nama>
+    if (!s || BUKAN_PERUMAHAN.indexOf(s) !== -1) {
+      return new URLSearchParams(location.search).get("p");
+    }
+    return s;
   }
 
   /* Menggabungkan data bersama (kontak, pesan WA) dengan data satu perumahan,
@@ -838,9 +858,11 @@
     const daftar = semua.perumahan || [];
     if (!daftar.length) throw new Error("Belum ada perumahan yang diisi.");
 
-    const p = (slug && daftar.find((x) => x.slug === slug)) || daftar[0];
-    if (slug && !daftar.some((x) => x.slug === slug)) {
-      console.warn('[DATA] Perumahan "' + slug + '" tidak ditemukan, menampilkan yang pertama.');
+    const p = slug ? daftar.find((x) => x.slug === slug) : daftar[0];
+    if (!p) {
+      const galat = new Error("PERUMAHAN_TIDAK_ADA:" + slug);
+      galat.slugDicari = slug;
+      throw galat;
     }
 
     return Object.assign({}, p, {
@@ -865,10 +887,26 @@
       if (!semua) semua = await ambilCadangan();
       SITE = rakitSitus(semua, slugDariAlamat());
     } catch (e) {
-      gagalMuat(e.message);
+      if (String(e.message).indexOf("PERUMAHAN_TIDAK_ADA") === 0) tidakDitemukan(e.slugDicari, semua);
+      else gagalMuat(e.message);
       return;
     }
     init();
+  }
+
+  /* Alamat perumahan yang salah ketik atau sudah dihapus. */
+  function tidakDitemukan(slug, semua) {
+    document.title = "Perumahan tidak ditemukan";
+    const daftar = (semua && semua.perumahan) || [];
+    const pilihan = daftar.map((p) =>
+      '<li><a href="/' + encodeURIComponent(p.slug) + '">' + esc(p.nama) + "</a></li>").join("");
+    document.body.innerHTML =
+      '<div style="max-width:620px;margin:70px auto;padding:28px;font-family:system-ui,sans-serif;line-height:1.7">' +
+      '<h1 style="font-size:26px;margin:0 0 12px">Perumahan tidak ditemukan</h1>' +
+      "<p>Alamat <b>/" + esc(slug || "") + "</b> tidak cocok dengan perumahan mana pun. " +
+      "Mungkin salah ketik, atau halamannya sudah tidak ada.</p>" +
+      (pilihan ? "<p>Yang tersedia sekarang:</p><ul>" + pilihan + "</ul>" : "") +
+      '<p><a href="/">← Kembali ke halaman depan</a></p></div>';
   }
 
   document.readyState === "loading"
