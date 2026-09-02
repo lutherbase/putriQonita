@@ -48,7 +48,7 @@
 
   /* ------------------------------------------------------------------
      PEMBACA LINK VIDEO
-     Cukup tempel link apa adanya di config.js — kode video diambil otomatis.
+     Cukup tempel link apa adanya di data/site.json — kode video diambil otomatis.
      Kalau linknya tidak bisa dibaca (mis. link pendek vt.tiktok.com),
      kartunya tetap tampil dan membuka video di aplikasi/situs aslinya.
      ------------------------------------------------------------------ */
