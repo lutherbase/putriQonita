@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="admin.css">
+<link rel="stylesheet" href="admin.css?v=2">
 </head>
 <body>
 
@@ -21,8 +21,9 @@
     <p class="masuk__sub">Masuk untuk mengubah isi website</p>
 
     <label class="kol">
-      <span>Email</span>
-      <input type="email" id="email" required autocomplete="username" placeholder="nama@email.com">
+      <span>Nama Pengguna</span>
+      <input type="text" id="pengguna" required autocomplete="username"
+             placeholder="putri" autocapitalize="none" spellcheck="false">
     </label>
     <label class="kol">
       <span>Kata Sandi</span>
@@ -62,8 +63,8 @@
 <div class="kabar" id="kabar" hidden></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="../assets/js/koneksi.js"></script>
-<script src="skema.js"></script>
-<script src="admin.js"></script>
+<script src="../assets/js/koneksi.js?v=2"></script>
+<script src="skema.js?v=2"></script>
+<script src="admin.js?v=2"></script>
 </body>
 </html>

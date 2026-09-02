@@ -9,6 +9,14 @@
   const $ = (s, c) => (c || document).querySelector(s);
   const db = window.supabase.createClient(window.KONEKSI.url, window.KONEKSI.kunci);
 
+  /* Sistem penyimpanan menuntut alamat email, sedangkan yang diketik cukup
+     nama pengguna. Jadi nama pengguna dilengkapi sendiri dengan akhiran di
+     bawah ini. Akhiran ini tidak pernah dikirimi surat dan tidak perlu
+     diketahui pemakai — dia cukup mengetik "putri". */
+  const AKHIRAN = "@akun.local";
+  const keEmail = (nama) => String(nama || "").trim().toLowerCase() + AKHIRAN;
+  const kePengguna = (email) => String(email || "").replace(AKHIRAN, "");
+
   let data = null;          // isi website yang sedang diedit
   let asli = "";            // salinan awal, untuk tahu ada perubahan atau tidak
   let aktif = 0;            // kelompok yang sedang dibuka
@@ -37,14 +45,14 @@
     tbl.disabled = true; tbl.textContent = "Sedang masuk…";
 
     const { data: hasil, error } = await db.auth.signInWithPassword({
-      email: $("#email").value.trim(),
+      email: keEmail($("#pengguna").value),
       password: $("#sandi").value
     });
 
     tbl.disabled = false; tbl.textContent = "Masuk";
     if (error) {
       galat.textContent = /invalid login/i.test(error.message)
-        ? "Email atau kata sandi salah. Coba periksa lagi."
+        ? "Nama pengguna atau kata sandi salah. Coba periksa lagi."
         : "Gagal masuk: " + error.message;
       galat.hidden = false;
       return;
@@ -75,7 +83,7 @@
     const inisial = (data.brand && data.brand.logoTeks) || "AD";
     $("#atasLogo").textContent = inisial;
     $("#atasNama").textContent = (data.brand && data.brand.nama) || "Menu Admin";
-    $("#atasInfo").textContent = sesi && sesi.user ? sesi.user.email : "";
+    $("#atasInfo").textContent = sesi && sesi.user ? kePengguna(sesi.user.email) : "";
 
     if (baris.updated_at) {
       const t = new Date(baris.updated_at);

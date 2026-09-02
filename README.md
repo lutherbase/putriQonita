@@ -260,12 +260,24 @@ dari HP atau laptop.
 
 ## Menambah orang yang boleh masuk
 
-Di dashboard Supabase project **putri-qonita-website**:
+Di menu admin, yang diketik cukup **nama pengguna** — misalnya `putri`, bukan
+alamat email. Tapi sistem penyimpanannya menuntut format email, jadi di balik
+layar nama pengguna dilengkapi otomatis dengan akhiran `@akun.local`. Akhiran
+itu tidak pernah dikirimi surat dan tidak perlu diketahui pemakai.
+
+Jadi saat membuat akun, di dashboard Supabase project
+**putri-qonita-website**:
 
 **Authentication → Users → Add user → Create new user**
 
-Isi email dan kata sandi, centang **Auto Confirm User**, lalu Create. Orang itu
-langsung bisa masuk ke `/admin`.
+| Kolom | Diisi |
+|---|---|
+| Email | `putri@akun.local` — nama pengguna + `@akun.local` |
+| Password | kata sandi yang Anda tentukan |
+| Auto Confirm User | **dicentang** |
+
+Nanti Putri cukup mengetik `putri` dan kata sandinya. Huruf besar-kecil tidak
+masalah, `Putri` dan `putri` sama saja.
 
 Untuk mencabut akses, hapus akunnya di halaman yang sama.
 
