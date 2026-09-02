@@ -31,6 +31,23 @@
   /* ------------------------------------------------------------------ */
   /* Pemberitahuan singkat                                               */
   /* ------------------------------------------------------------------ */
+  /* Laporkan galat apa pun ke layar. Tanpa ini, kegagalan hanya terlihat di
+     DevTools — dan halaman tampak "diam saja" tanpa penjelasan. */
+  let galatTerlapor = false;
+  function laporkanGalat(sumber, pesan, berkas, baris) {
+    if (galatTerlapor) return;
+    galatTerlapor = true;
+    const dimana = berkas ? " (" + String(berkas).split("/").pop() + (baris ? " baris " + baris : "") + ")" : "";
+    tunjukkanGagal("Terjadi galat [" + sumber + "]: " + pesan + dimana);
+  }
+  window.addEventListener("error", (e) => {
+    laporkanGalat("skrip", e.message || "tidak diketahui", e.filename, e.lineno);
+  });
+  window.addEventListener("unhandledrejection", (e) => {
+    const r = e.reason;
+    laporkanGalat("janji", (r && (r.message || r.error_description)) || String(r));
+  });
+
   let jamKabar;
   function kabar(teks, salah) {
     const el = $("#kabar");
