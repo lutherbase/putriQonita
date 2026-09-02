@@ -1,0 +1,11 @@
+# Pengaturan Netlify. Website ini tidak perlu proses build —
+# semua file sudah siap pakai, jadi cukup ditayangkan apa adanya.
+[build]
+  publish = "."
+  command = ""
+
+# Menu admin jangan sampai terindeks Google
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"

@@ -1,0 +1,123 @@
+# ---------------------------------------------------------------------------
+# Pengaturan menu admin (Decap CMS)
+# Semua yang diubah di /admin akan tersimpan ke data/site.json
+# ---------------------------------------------------------------------------
+backend:
+  name: git-gateway
+  branch: main
+
+# Foto yang diunggah lewat menu admin masuk ke folder ini
+media_folder: "assets/img"
+public_folder: "assets/img"
+
+locale: "id"
+
+collections:
+  - name: "situs"
+    label: "Isi Website"
+    files:
+      # ---------------------------------------------------------------
+      - name: "identitas"
+        label: "1. Identitas & Kontak"
+        file: "data/site.json"
+        description: "Nama perumahan, nomor WhatsApp, dan data kontak."
+        fields:
+          - { name: brand, label: "Identitas", widget: object, fields: [
+              { name: nama, label: "Nama Perumahan", widget: string },
+              { name: tagline, label: "Slogan", widget: string },
+              { name: developer, label: "Nama Developer", widget: string },
+              { name: logoTeks, label: "Inisial Logo (2 huruf)", widget: string, pattern: ['^.{1,3}$', 'Maksimal 3 huruf'] },
+              { name: lokasiSingkat, label: "Kota (tampil di bar atas)", widget: string }
+            ] }
+          - { name: kontak, label: "Kontak", widget: object, fields: [
+              { name: whatsapp, label: "Nomor WhatsApp", widget: string, hint: "Format 62..., tanpa + dan tanpa 0 di depan. Contoh: 62895634938872", pattern: ['^62[0-9]{8,15}$', 'Harus diawali 62 lalu angka saja'] },
+              { name: namaAgen, label: "Nama Agen", widget: string },
+              { name: jabatan, label: "Jabatan", widget: string },
+              { name: fotoAgen, label: "Foto Agen", widget: image, required: false },
+              { name: telepon, label: "Nomor untuk ditampilkan", widget: string, hint: "Boleh pakai strip, mis. 0895-6349-38872" },
+              { name: email, label: "Email", widget: string },
+              { name: alamat, label: "Alamat Kantor Pemasaran", widget: text },
+              { name: jamKerja, label: "Jam Kerja", widget: string },
+              { name: instagram, label: "Link Instagram", widget: string, required: false },
+              { name: tiktokProfil, label: "Link Profil TikTok", widget: string, required: false },
+              { name: youtubeProfil, label: "Link Channel YouTube", widget: string, required: false }
+            ] }
+          - { name: pesanWa, label: "Pesan Otomatis WhatsApp", widget: object, collapsed: true, fields: [
+              { name: umum, label: "Tombol umum", widget: text },
+              { name: unit, label: "Tombol di kartu unit", widget: text, hint: "{unit} dan {harga} otomatis diganti" },
+              { name: survei, label: "Tombol survei", widget: text },
+              { name: kpr, label: "Hasil simulasi KPR", widget: text }
+            ] }
+          - { name: hero, label: "Tampilan Paling Atas", widget: object, collapsed: true, fields: [
+              { name: label, label: "Label kecil", widget: string },
+              { name: judul1, label: "Judul baris 1", widget: string },
+              { name: judul2, label: "Judul baris 2 (miring)", widget: string },
+              { name: deskripsi, label: "Paragraf pembuka", widget: text },
+              { name: gambar, label: "Gambar utama", widget: image },
+              { name: statistik, label: "Angka Statistik", widget: list, fields: [
+                  { name: angka, label: "Angka", widget: number, value_type: float },
+                  { name: akhiran, label: "Satuan", widget: string, required: false, hint: "mis. Ha, +, %" },
+                  { name: label, label: "Keterangan", widget: string }
+                ] }
+            ] }
+          - { name: trustBadges, label: "Baris Kepercayaan", widget: list, collapsed: true, hint: "Tulisan pendek, mis. Legalitas SHM" }
+          - { name: keunggulan, label: "Keunggulan", widget: list, collapsed: true, fields: [
+              { name: ikon, label: "Ikon", widget: select, options: [shield, road, leaf, lock, wallet, building, home, clock, pin, check] },
+              { name: judul, label: "Judul", widget: string },
+              { name: teks, label: "Penjelasan", widget: text }
+            ] }
+          - { name: unit, label: "Tipe Unit", widget: list, collapsed: true, summary: "{{fields.nama}} — {{fields.hargaTeks}}", fields: [
+              { name: nama, label: "Nama Tipe", widget: string },
+              { name: kategori, label: "Kategori", widget: select, options: [Subsidi, Komersil, Premium, Ruko] },
+              { name: status, label: "Status", widget: string, hint: "mis. Ready Stock, Indent 8 Bulan" },
+              { name: harga, label: "Harga (angka saja)", widget: number, value_type: int, hint: "Dipakai kalkulator KPR. Contoh: 285000000" },
+              { name: hargaTeks, label: "Harga (tulisan)", widget: string, hint: "Contoh: Rp 285 Juta" },
+              { name: cicilan, label: "Cicilan (tulisan)", widget: string },
+              { name: lb, label: "Luas Bangunan (m2)", widget: number, value_type: int },
+              { name: lt, label: "Luas Tanah (m2)", widget: number, value_type: int },
+              { name: kt, label: "Kamar Tidur", widget: number, value_type: int },
+              { name: km, label: "Kamar Mandi", widget: number, value_type: int },
+              { name: lantai, label: "Jumlah Lantai", widget: number, value_type: int },
+              { name: carport, label: "Carport", widget: number, value_type: int },
+              { name: gambar, label: "Foto Unit", widget: image },
+              { name: badge, label: "Label Sudut", widget: string, required: false, hint: "mis. TERLARIS. Kosongkan kalau tidak perlu" },
+              { name: unggulan, label: "Poin Unggulan", widget: list },
+              { name: spek, label: "Spesifikasi Bangunan", widget: list }
+            ] }
+          - { name: youtube, label: "Video YouTube", widget: list, collapsed: true, summary: "{{fields.judul}}", fields: [
+              { name: link, label: "Link Video", widget: string, hint: "Tempel link apa adanya, mis. https://youtu.be/xxxx" },
+              { name: judul, label: "Judul Kartu", widget: string },
+              { name: durasi, label: "Durasi", widget: string, required: false, hint: "mis. 8:24" }
+            ] }
+          - { name: tiktok, label: "Video TikTok", widget: list, collapsed: true, summary: "{{fields.judul}}", fields: [
+              { name: link, label: "Link Video", widget: string, hint: "Pakai link panjang yang ada kata /video/ atau /photo/" },
+              { name: judul, label: "Judul Kartu", widget: string },
+              { name: sampul, label: "Gambar Sampul", widget: image, required: false }
+            ] }
+          - { name: lokasi, label: "Lokasi", widget: object, collapsed: true, fields: [
+              { name: embedMaps, label: "Alamat Peta Tertanam", widget: string, hint: "Google Maps > Share > Embed a map > salin isi src" },
+              { name: linkMaps, label: "Link Tombol Buka Maps", widget: string },
+              { name: sekitar, label: "Akses & Fasilitas Sekitar", widget: list, fields: [
+                  { name: menit, label: "Jarak Waktu", widget: string, hint: "mis. 10 mnt" },
+                  { name: tempat, label: "Nama Tempat", widget: string }
+                ] }
+            ] }
+          - { name: kpr, label: "Nilai Awal Kalkulator KPR", widget: object, collapsed: true, fields: [
+              { name: dpPersen, label: "DP (%)", widget: number, value_type: float },
+              { name: tenorTahun, label: "Tenor (tahun)", widget: number, value_type: int },
+              { name: bungaPersen, label: "Bunga per tahun (%)", widget: number, value_type: float }
+            ] }
+          - { name: testimoni, label: "Testimoni", widget: list, collapsed: true, summary: "{{fields.nama}}", fields: [
+              { name: nama, label: "Nama", widget: string },
+              { name: info, label: "Keterangan", widget: string, hint: "mis. Pembeli Tipe Melati" },
+              { name: teks, label: "Isi Testimoni", widget: text }
+            ] }
+          - { name: faq, label: "Tanya Jawab", widget: list, collapsed: true, summary: "{{fields.t}}", fields: [
+              { name: t, label: "Pertanyaan", widget: string },
+              { name: j, label: "Jawaban", widget: text }
+            ] }
+          - { name: promo, label: "Promo", widget: object, collapsed: true, fields: [
+              { name: judul, label: "Judul Promo", widget: string },
+              { name: daftar, label: "Daftar Promo", widget: list },
+              { name: catatan, label: "Catatan Kecil", widget: string }
+            ] }

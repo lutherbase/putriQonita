@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 825" width="1200" height="825" role="img" aria-label="Foto Unit 4 - ganti dengan foto asli">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1f4155"/><stop offset="1" stop-color="#0f2433"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".22"/><stop offset="1" stop-color="#ffffff" stop-opacity=".05"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="825" fill="url(#g)"/>
+  <circle cx="983" cy="165" r="132" fill="#ffffff" opacity=".16"/>
+  <path d="M0 643 Q 300.0 577.5 600.0 643.5 T 1200 627.0 L 1200 825 L 0 825 Z" fill="url(#ground)"/>
+
+  <g transform="translate(240,190) scale(1.55)" opacity=".95">
+    <path d="M60 250 L60 150 L200 55 L340 150 L340 250 Z" fill="#f4eee2"/>
+    <path d="M40 158 L200 40 L360 158 L340 172 L200 68 L60 172 Z" fill="#cfae72"/>
+    <rect x="150" y="185" width="58" height="65" rx="3" fill="#93713d"/>
+    <rect x="232" y="168" width="52" height="46" rx="3" fill="#a5d1e8"/>
+    <rect x="106" y="168" width="34" height="34" rx="3" fill="#a5d1e8"/>
+    <path d="M232 191h52M258 168v46" stroke="#f4eee2" stroke-width="3"/>
+    <rect x="286" y="96" width="24" height="46" rx="3" fill="#cfae72"/>
+    <ellipse cx="392" cy="250" rx="46" ry="14" fill="#54946c" opacity=".35"/>
+    <path d="M392 250v-46" stroke="#54946c" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="392" cy="188" r="34" fill="#54946c"/>
+    <circle cx="368" cy="204" r="22" fill="#54946c" opacity=".85"/>
+    <circle cx="418" cy="206" r="20" fill="#54946c" opacity=".8"/>
+  </g>
+
+  <text x="600.0" y="799" text-anchor="middle" font-family="Georgia,serif" font-size="37"
+        fill="#ffffff" opacity=".62" letter-spacing="2">Foto Unit 4 - ganti dengan foto asli</text>
+</svg>

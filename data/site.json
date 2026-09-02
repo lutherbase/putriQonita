@@ -1,0 +1,413 @@
+{
+  "brand": {
+    "nama": "Grand Harmoni Residence",
+    "tagline": "Hunian Modern di Jantung Kota",
+    "developer": "PT Harmoni Properti Nusantara",
+    "logoTeks": "GH",
+    "lokasiSingkat": "Depok, Jawa Barat"
+  },
+  "kontak": {
+    "whatsapp": "62895634938872",
+    "namaAgen": "Putri Qonita",
+    "jabatan": "Marketing Executive",
+    "fotoAgen": "assets/img/agen.svg",
+    "telepon": "0895-6349-38872",
+    "email": "marketing@grandharmoni.id",
+    "alamat": "Jl. Boulevard Grand Depok City No.25, Jatimulya, Kec. Cilodong, Kota Depok, Jawa Barat 16412, Indonesia",
+    "jamKerja": "Senin – Minggu, 08.00 – 20.00 WIB",
+    "instagram": "https://instagram.com/",
+    "tiktokProfil": "https://www.tiktok.com/@putrirz_i?_r=1&_t=ZS-99O7E1y97hf",
+    "youtubeProfil": "https://youtube.com/@"
+  },
+  "pesanWa": {
+    "umum": "Halo Kak, saya lihat website Grand Harmoni Residence. Saya tertarik dan ingin tanya-tanya dulu. Boleh minta info lengkapnya?",
+    "unit": "Halo Kak, saya tertarik dengan *{unit}* (mulai {harga}) di Grand Harmoni Residence. Boleh minta brosur, denah, dan simulasi KPR-nya?",
+    "survei": "Halo Kak, saya ingin jadwalkan *survei lokasi* Grand Harmoni Residence. Kapan waktu yang tersedia?",
+    "kpr": "Halo Kak, saya sudah coba simulasi KPR di website:\n\n• Unit: {unit}\n• Harga: {harga}\n• DP: {dp}\n• Tenor: {tenor}\n• Estimasi angsuran: {angsuran}/bulan\n\nMohon dibantu proses pengajuannya ya."
+  },
+  "hero": {
+    "label": "Ready Stock & Indent 2026",
+    "judul1": "Rumah Impian Anda",
+    "judul2": "Dimulai Dari Sini",
+    "deskripsi": "Kawasan hunian eksklusif 8 hektar dengan konsep resort living. Legalitas SHM, bebas banjir, 10 menit ke pintu tol, dan cicilan mulai 3 jutaan per bulan.",
+    "gambar": "assets/img/hero.svg",
+    "statistik": [
+      {
+        "angka": 8,
+        "akhiran": " Ha",
+        "label": "Luas Kawasan"
+      },
+      {
+        "angka": 340,
+        "akhiran": "+",
+        "label": "Unit Terbangun"
+      },
+      {
+        "angka": 92,
+        "akhiran": "%",
+        "label": "Unit Terjual"
+      },
+      {
+        "angka": 12,
+        "akhiran": " Th",
+        "label": "Pengalaman Developer"
+      }
+    ]
+  },
+  "trustBadges": [
+    "Sertifikat SHM Pecah Per Unit",
+    "KPR 12 Bank Rekanan",
+    "IMB / PBG Lengkap",
+    "Bebas Banjir & Bebas Sengketa",
+    "Serah Terima Tepat Waktu"
+  ],
+  "keunggulan": [
+    {
+      "ikon": "shield",
+      "judul": "Legalitas Aman 100%",
+      "teks": "Sertifikat Hak Milik pecah per unit, PBG lengkap, dan tanah bebas sengketa. Semua dokumen bisa dicek langsung di kantor pemasaran."
+    },
+    {
+      "ikon": "road",
+      "judul": "Akses Super Strategis",
+      "teks": "10 menit ke pintu tol, 5 menit ke stasiun, dikelilingi sekolah nasional plus, RS tipe B, dan pusat perbelanjaan."
+    },
+    {
+      "ikon": "leaf",
+      "judul": "Konsep Resort Living",
+      "teks": "40% lahan untuk ruang hijau, jogging track 1,2 km, danau buatan, dan taman tematik di setiap klaster."
+    },
+    {
+      "ikon": "lock",
+      "judul": "One Gate System 24 Jam",
+      "teks": "Satu pintu akses, CCTV 42 titik, security patroli 3 shift, dan boom gate otomatis berbasis kartu penghuni."
+    },
+    {
+      "ikon": "wallet",
+      "judul": "Cicilan Mulai 3 Jutaan",
+      "teks": "DP ringan bisa dicicil 12x tanpa bunga, KPR subsidi & komersil, serta promo free biaya-biaya untuk 20 pembeli pertama."
+    },
+    {
+      "ikon": "building",
+      "judul": "Fasilitas Lengkap",
+      "teks": "Clubhouse, kolam renang, lapangan multifungsi, co-working space, playground, dan area komersial di dalam kawasan."
+    }
+  ],
+  "unit": [
+    {
+      "nama": "Tipe Melati 36/72",
+      "kategori": "Subsidi",
+      "status": "Ready Stock",
+      "harga": 285000000,
+      "hargaTeks": "Rp 285 Juta",
+      "cicilan": "± Rp 1,8 Jt/bln",
+      "lb": 36,
+      "lt": 72,
+      "kt": 2,
+      "km": 1,
+      "lantai": 1,
+      "carport": 1,
+      "gambar": "assets/img/unit-1.svg",
+      "unggulan": [
+        "Ready stock",
+        "Bisa KPR subsidi",
+        "Sisa 4 unit"
+      ],
+      "spek": [
+        "Pondasi batu kali & sloof beton bertulang",
+        "Dinding bata ringan finishing cat interior",
+        "Rangka atap baja ringan, genteng beton",
+        "Lantai granit 60x60 seluruh ruangan",
+        "Sanitary TOTO, listrik 1300 watt",
+        "Air PDAM + jet pump cadangan"
+      ],
+      "badge": "TERLARIS"
+    },
+    {
+      "nama": "Tipe Anggrek 45/90",
+      "kategori": "Komersil",
+      "status": "Ready Stock",
+      "harga": 495000000,
+      "hargaTeks": "Rp 495 Juta",
+      "cicilan": "± Rp 3,2 Jt/bln",
+      "lb": 45,
+      "lt": 90,
+      "kt": 2,
+      "km": 2,
+      "lantai": 1,
+      "carport": 1,
+      "gambar": "assets/img/unit-2.svg",
+      "unggulan": [
+        "Taman belakang",
+        "Dapur bersih & kotor",
+        "Hook tersedia"
+      ],
+      "spek": [
+        "Pondasi batu kali & sloof beton bertulang",
+        "Dinding bata merah plester aci",
+        "Rangka atap baja ringan, genteng flat",
+        "Lantai granit 60x60, kamar mandi keramik anti slip",
+        "Kusen aluminium powder coating",
+        "Listrik 2200 watt, air PDAM"
+      ],
+      "badge": ""
+    },
+    {
+      "nama": "Tipe Tulip 60/105",
+      "kategori": "Komersil",
+      "status": "Indent 8 Bulan",
+      "harga": 785000000,
+      "hargaTeks": "Rp 785 Juta",
+      "cicilan": "± Rp 5,1 Jt/bln",
+      "lb": 60,
+      "lt": 105,
+      "kt": 3,
+      "km": 2,
+      "lantai": 2,
+      "carport": 1,
+      "gambar": "assets/img/unit-3.svg",
+      "unggulan": [
+        "2 lantai",
+        "Balkon utama",
+        "Void ruang tamu"
+      ],
+      "spek": [
+        "Struktur beton bertulang K-250",
+        "Dinding bata ringan finishing cat",
+        "Tangga beton finishing granit",
+        "Lantai granit 60x60 + parket kamar utama",
+        "Kusen aluminium & kaca tempered",
+        "Listrik 3500 watt, water heater"
+      ],
+      "badge": "FAVORIT"
+    },
+    {
+      "nama": "Tipe Kamboja 70/120",
+      "kategori": "Premium",
+      "status": "Indent 10 Bulan",
+      "harga": 1150000000,
+      "hargaTeks": "Rp 1,15 Miliar",
+      "cicilan": "± Rp 7,4 Jt/bln",
+      "lb": 70,
+      "lt": 120,
+      "kt": 3,
+      "km": 3,
+      "lantai": 2,
+      "carport": 2,
+      "gambar": "assets/img/unit-4.svg",
+      "unggulan": [
+        "Carport 2 mobil",
+        "Kamar ART",
+        "Smart door lock"
+      ],
+      "spek": [
+        "Struktur beton bertulang K-300",
+        "Dinding bata ringan double layer",
+        "Atap baja ringan + insulasi peredam panas",
+        "Lantai granit 80x80 impor",
+        "Kusen aluminium premium, kaca double glass",
+        "Listrik 4400 watt, smart home ready"
+      ],
+      "badge": ""
+    },
+    {
+      "nama": "Tipe Bougenville 90/150",
+      "kategori": "Premium",
+      "status": "Indent 12 Bulan",
+      "harga": 1650000000,
+      "hargaTeks": "Rp 1,65 Miliar",
+      "cicilan": "± Rp 10,6 Jt/bln",
+      "lb": 90,
+      "lt": 150,
+      "kt": 4,
+      "km": 3,
+      "lantai": 2,
+      "carport": 2,
+      "gambar": "assets/img/unit-5.svg",
+      "unggulan": [
+        "View danau",
+        "Private garden",
+        "Rooftop area"
+      ],
+      "spek": [
+        "Struktur beton bertulang K-300",
+        "Dinding bata ringan + waterproofing",
+        "Rooftop dak beton siap pakai",
+        "Lantai marmer ruang tamu, granit area lain",
+        "Kusen aluminium premium black series",
+        "Listrik 5500 watt, solar water heater"
+      ],
+      "badge": "LIMITED"
+    },
+    {
+      "nama": "Ruko Harmoni 2 Lantai",
+      "kategori": "Ruko",
+      "status": "Ready Stock",
+      "harga": 1350000000,
+      "hargaTeks": "Rp 1,35 Miliar",
+      "cicilan": "± Rp 8,7 Jt/bln",
+      "lb": 96,
+      "lt": 60,
+      "kt": 1,
+      "km": 2,
+      "lantai": 2,
+      "carport": 1,
+      "gambar": "assets/img/unit-6.svg",
+      "unggulan": [
+        "Hadap jalan utama",
+        "Rolling door",
+        "Traffic tinggi"
+      ],
+      "spek": [
+        "Struktur beton bertulang K-300",
+        "Bentang lebar tanpa kolom tengah",
+        "Rolling door galvanis + kanopi",
+        "Lantai keramik 60x60 heavy duty",
+        "Toilet lantai 1 & 2",
+        "Listrik 5500 watt, saluran air terpisah"
+      ],
+      "badge": "INVESTASI"
+    }
+  ],
+  "youtube": [
+    {
+      "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "judul": "House Tour Tipe Tulip 60/105",
+      "durasi": "8:24"
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "judul": "Update Progres Pembangunan Klaster B",
+      "durasi": "5:11"
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "judul": "Review Fasilitas & Clubhouse",
+      "durasi": "6:47"
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "judul": "Cara Ajukan KPR Sampai Akad",
+      "durasi": "11:02"
+    }
+  ],
+  "tiktok": [
+    {
+      "link": "https://www.tiktok.com/@putrirz_i/video/7666504449346522375",
+      "judul": "Cicilan 1 jutaan, rumah 2 lantai",
+      "sampul": "assets/img/tiktok-1.jpg"
+    },
+    {
+      "link": "https://www.tiktok.com/@putrirz_i/video/7658635638261943570",
+      "judul": "Dekat kuliner, sekolah & transportasi",
+      "sampul": "assets/img/tiktok-2.jpg"
+    },
+    {
+      "link": "https://www.tiktok.com/@putrirz_i/video/7674686917962730770",
+      "judul": "Bismillah — unit terbaru",
+      "sampul": "assets/img/tiktok-3.jpg"
+    },
+    {
+      "link": "https://www.tiktok.com/@putrirz_i/photo/7674275594720316690",
+      "judul": "Galeri unit (slideshow foto)",
+      "sampul": "assets/img/tiktok-4.jpg"
+    }
+  ],
+  "lokasi": {
+    "embedMaps": "https://www.google.com/maps?q=Jl.+Boulevard+Grand+Depok+City+No.25,+Jatimulya,+Kec.+Cilodong,+Kota+Depok,+Jawa+Barat+16413&output=embed",
+    "linkMaps": "https://maps.app.goo.gl/XPWFPMTU6nuwoy5x8",
+    "sekitar": [
+      {
+        "menit": "10 mnt",
+        "tempat": "Pintu Tol Cijago"
+      },
+      {
+        "menit": "8 mnt",
+        "tempat": "Stasiun Pondok Rajeg"
+      },
+      {
+        "menit": "15 mnt",
+        "tempat": "Stasiun Depok (Depok Lama)"
+      },
+      {
+        "menit": "8 mnt",
+        "tempat": "RS Hermina Depok"
+      },
+      {
+        "menit": "10 mnt",
+        "tempat": "Margo City & Depok Town Square"
+      },
+      {
+        "menit": "15 mnt",
+        "tempat": "Universitas Indonesia"
+      },
+      {
+        "menit": "7 mnt",
+        "tempat": "Sekolah & pasar terdekat"
+      }
+    ]
+  },
+  "kpr": {
+    "dpPersen": 15,
+    "tenorTahun": 15,
+    "bungaPersen": 7.5
+  },
+  "testimoni": [
+    {
+      "nama": "Rina & Adit",
+      "info": "Penghuni Tipe Anggrek, Klaster A",
+      "teks": "Prosesnya cepat dan transparan. Dari survei sampai akad cuma 3 minggu. Pak Budi sabar banget jawab pertanyaan kami yang awam soal KPR."
+    },
+    {
+      "nama": "Hendra Wijaya",
+      "info": "Investor, 2 unit Ruko",
+      "teks": "Saya ambil 2 ruko untuk disewakan. Baru 4 bulan serah terima sudah tersewa dua-duanya. Traffic depan lumayan ramai."
+    },
+    {
+      "nama": "Siti Nurhaliza",
+      "info": "Penghuni Tipe Melati, Klaster C",
+      "teks": "Rumah pertama saya. Awalnya ragu karena harga subsidi, tapi kualitas bangunannya rapi dan lingkungannya asri. Anak-anak betah main di taman."
+    },
+    {
+      "nama": "Doni Prasetyo",
+      "info": "Penghuni Tipe Tulip, Klaster B",
+      "teks": "Yang bikin saya yakin: semua yang dijanjikan di brosur benar-benar ada. Fasilitas jadi duluan sebelum unit diserahterimakan."
+    }
+  ],
+  "faq": [
+    {
+      "t": "Apakah bisa KPR? Bank apa saja yang bekerja sama?",
+      "j": "Bisa. Kami bekerja sama dengan 12 bank rekanan, antara lain BTN, BCA, Mandiri, BNI, BRI, CIMB Niaga, dan Bank Syariah Indonesia — tersedia skema konvensional maupun syariah. Tim kami akan bantu dari pengajuan sampai akad."
+    },
+    {
+      "t": "Berapa DP minimal dan apakah bisa dicicil?",
+      "j": "DP mulai dari 10–15% dari harga unit, dan bisa dicicil hingga 12 kali tanpa bunga sebelum akad kredit. Untuk unit subsidi, DP bisa lebih ringan sesuai ketentuan pemerintah."
+    },
+    {
+      "t": "Bagaimana status legalitas tanah dan bangunannya?",
+      "j": "Seluruh kawasan bersertifikat Hak Milik (SHM) yang dipecah per unit atas nama pembeli, dilengkapi PBG/IMB. Dokumen asli bisa Anda periksa langsung di kantor pemasaran kapan saja."
+    },
+    {
+      "t": "Berapa lama proses serah terima unit?",
+      "j": "Unit ready stock dapat diserahterimakan 2–4 minggu setelah akad. Unit indent membutuhkan waktu 8–12 bulan tergantung tipe, dengan laporan progres pembangunan rutin setiap bulan."
+    },
+    {
+      "t": "Apakah ada biaya tambahan di luar harga unit?",
+      "j": "Biaya yang timbul meliputi BPHTB, biaya KPR (provisi, appraisal, asuransi), dan biaya notaris/AJB. Untuk 20 pembeli pertama setiap bulan, kami berikan promo free biaya-biaya. Rinciannya akan kami kirim lengkap via WhatsApp."
+    },
+    {
+      "t": "Bisakah saya survei lokasi dulu sebelum memutuskan?",
+      "j": "Sangat kami sarankan. Survei bisa dilakukan setiap hari pukul 08.00–20.00 WIB, dan kami sediakan penjemputan gratis dari Stasiun Depok (Depok Lama) untuk calon pembeli dari luar kota. Cukup hubungi kami via WhatsApp untuk buat janji."
+    }
+  ],
+  "promo": {
+    "judul": "Promo Bulan Ini — Hemat Hingga Rp 65 Juta",
+    "daftar": [
+      "Free biaya BPHTB, AJB & Notaris",
+      "Free kanopi carport + pagar depan",
+      "Free AC 2 unit & water heater",
+      "Voucher furnitur Rp 15 juta"
+    ],
+    "catatan": "*Berlaku untuk 20 pembeli pertama setiap bulan. Syarat & ketentuan berlaku."
+  }
+}
