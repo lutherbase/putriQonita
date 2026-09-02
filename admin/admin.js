@@ -75,7 +75,19 @@
      yang hilang sendiri membuat orang mengira tidak terjadi apa-apa. */
   function tunjukkanGagal(teks) {
     const galat = $("#masukGalat");
-    galat.textContent = teks;
+    galat.textContent = teks + " ";
+    const tbl = document.createElement("button");
+    tbl.type = "button";
+    tbl.className = "tbl tbl--kecil";
+    tbl.style.marginTop = "10px";
+    tbl.textContent = "Bersihkan & mulai ulang";
+    tbl.addEventListener("click", async () => {
+      try { await db.auth.signOut(); } catch (e) {}
+      try { localStorage.clear(); sessionStorage.clear(); } catch (e) {}
+      location.reload();
+    });
+    galat.appendChild(document.createElement("br"));
+    galat.appendChild(tbl);
     galat.hidden = false;
     $("#layarMasuk").hidden = false;
     $("#aplikasi").hidden = true;
@@ -91,6 +103,16 @@
   /* Memuat data lalu membangun tampilan                                 */
   /* ------------------------------------------------------------------ */
   async function mulaiAplikasi() {
+    try {
+      await muatDanGambar();
+    } catch (e) {
+      tunjukkanGagal("Berhasil masuk, tetapi tampilan gagal disiapkan: " +
+        (e && e.message ? e.message : e));
+      console.error("[ADMIN] gagal menyiapkan tampilan:", e);
+    }
+  }
+
+  async function muatDanGambar() {
     const { data: baris, error } = await db.from("site_config").select("data, updated_at, updated_by").eq("id", 1).single();
     if (error) {
       tunjukkanGagal("Berhasil masuk, tetapi isi website gagal dibaca dari server: " +
