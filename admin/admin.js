@@ -64,8 +64,22 @@
       return;
     }
     sesi = hasil.session;
-    await mulaiAplikasi();
+    try {
+      await mulaiAplikasi();
+    } catch (e) {
+      tunjukkanGagal("Berhasil masuk, tetapi isi website gagal dimuat: " + (e && e.message ? e.message : e));
+    }
   });
+
+  /* Tampilkan kegagalan DI LAYAR MASUK dan biarkan menetap — pemberitahuan
+     yang hilang sendiri membuat orang mengira tidak terjadi apa-apa. */
+  function tunjukkanGagal(teks) {
+    const galat = $("#masukGalat");
+    galat.textContent = teks;
+    galat.hidden = false;
+    $("#layarMasuk").hidden = false;
+    $("#aplikasi").hidden = true;
+  }
 
   $("#tblKeluar").addEventListener("click", async () => {
     if (adaPerubahan() && !confirm("Ada perubahan yang belum disimpan. Tetap keluar?")) return;
@@ -78,7 +92,16 @@
   /* ------------------------------------------------------------------ */
   async function mulaiAplikasi() {
     const { data: baris, error } = await db.from("site_config").select("data, updated_at, updated_by").eq("id", 1).single();
-    if (error) { kabar("Gagal memuat data: " + error.message, true); return; }
+    if (error) {
+      tunjukkanGagal("Berhasil masuk, tetapi isi website gagal dibaca dari server: " +
+        error.message + (error.hint ? " (" + error.hint + ")" : "") +
+        ". Coba matikan pemblokir iklan lalu muat ulang halaman.");
+      return;
+    }
+    if (!baris || !baris.data) {
+      tunjukkanGagal("Berhasil masuk, tetapi datanya kosong di server. Hubungi pengelola website.");
+      return;
+    }
 
     data = baris.data;
     asli = JSON.stringify(data);
@@ -407,6 +430,10 @@
   /* Kalau sudah pernah masuk, langsung buka                             */
   /* ------------------------------------------------------------------ */
   db.auth.getSession().then(({ data: d }) => {
-    if (d.session) { sesi = d.session; mulaiAplikasi(); }
+    if (!d.session) return;
+    sesi = d.session;
+    mulaiAplikasi().catch((e) => {
+      tunjukkanGagal("Sesi lama ditemukan, tetapi isi website gagal dimuat: " + (e && e.message ? e.message : e));
+    });
   });
 })();
