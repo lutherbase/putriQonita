@@ -1,5 +1,6 @@
 /* =====================================================================
-   MAIN.JS — merender seluruh isi halaman dari data/site.json
+   MAIN.JS — merender seluruh isi halaman dari database Supabase,
+   dengan salinan cadangan di data/site.json
    Tidak ada library eksternal. Aman dijalankan tanpa build tool.
 
    CATATAN: karena datanya diambil lewat jaringan, halaman ini harus dibuka
@@ -780,11 +781,41 @@
       '<code>python3 preview-lokal.py</code> lalu buka <code>http://localhost:4400</code>.</p></div>');
   }
 
+  /* Isi website diambil dari database (yang diubah lewat menu admin).
+     Kalau database sedang tidak bisa dihubungi, dipakai salinan cadangan
+     data/site.json — jadi website tetap tampil, tidak pernah kosong. */
+  async function ambilDariDatabase() {
+    const k = window.KONEKSI;
+    if (!k || !k.url || !k.kunci) return null;
+
+    const batal = new AbortController();
+    const jam = setTimeout(() => batal.abort(), 6000);   // jangan menggantung terlalu lama
+    try {
+      const r = await fetch(k.url + "/rest/v1/site_config?select=data&id=eq.1", {
+        headers: { apikey: k.kunci, Accept: "application/json" },
+        signal: batal.signal
+      });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      const baris = await r.json();
+      return (baris && baris[0] && baris[0].data) || null;
+    } catch (e) {
+      console.warn("[DATA] Database tidak terbaca (" + e.message + "), memakai salinan cadangan.");
+      return null;
+    } finally {
+      clearTimeout(jam);
+    }
+  }
+
+  async function ambilCadangan() {
+    const r = await fetch("data/site.json", { cache: "no-cache" });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json();
+  }
+
   async function mulai() {
     try {
-      const r = await fetch("data/site.json", { cache: "no-cache" });
-      if (!r.ok) throw new Error("HTTP " + r.status);
-      SITE = await r.json();
+      SITE = await ambilDariDatabase();
+      if (!SITE) SITE = await ambilCadangan();
     } catch (e) {
       gagalMuat(e.message);
       return;

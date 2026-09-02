@@ -3,18 +3,6 @@
 [build]
   publish = "."
   command = ""
-  functions = "netlify/functions"
-
-# Alamat pendek untuk proses login admin
-[[redirects]]
-  from = "/api/auth"
-  to = "/.netlify/functions/auth"
-  status = 200
-
-[[redirects]]
-  from = "/api/callback"
-  to = "/.netlify/functions/callback"
-  status = 200
 
 # Menu admin jangan sampai terindeks Google
 [[headers]]

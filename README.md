@@ -249,58 +249,57 @@ python3 -m http.server 4399
 
 # Mengubah isi lewat Menu Admin
 
-Setelah website dipasang di Netlify, Anda tidak perlu lagi menyentuh file.
-Buka `alamat-website-anda/admin`, login, ubah isinya lewat formulir, tekan
-**Publish** — website langsung ter-update sendiri.
+Buka **alamat-website-anda/admin**, masuk dengan email dan kata sandi, ubah
+isinya lewat formulir, lalu tekan **Simpan Perubahan**. Website langsung
+berubah — tidak perlu menyentuh file apa pun, tidak perlu akun GitHub.
 
 Menu admin memuat seluruh isi website: identitas, kontak, pesan otomatis
 WhatsApp, tampilan atas, keunggulan, tipe unit, video YouTube & TikTok, lokasi,
-kalkulator KPR, testimoni, tanya jawab, dan promo.
+kalkulator KPR, testimoni, tanya jawab, dan promo. Foto bisa diunggah langsung
+dari HP atau laptop.
 
-## Cara memasangnya (sekali saja)
+## Menambah orang yang boleh masuk
 
-Butuh dua akun gratis: **GitHub** dan **Netlify**.
+Di dashboard Supabase project **putri-qonita-website**:
 
-### 1. Naikkan ke GitHub
+**Authentication → Users → Add user → Create new user**
 
-Buat repositori baru di github.com (boleh private), lalu di Terminal dari
-folder ini jalankan perintah yang ditunjukkan GitHub, kira-kira:
+Isi email dan kata sandi, centang **Auto Confirm User**, lalu Create. Orang itu
+langsung bisa masuk ke `/admin`.
 
-```
-git remote add origin https://github.com/NAMA-ANDA/NAMA-REPO.git
-git push -u origin main
-```
+Untuk mencabut akses, hapus akunnya di halaman yang sama.
 
-### 2. Sambungkan ke Netlify
+## Cara kerjanya
 
-1. Masuk ke netlify.com, pilih **Add new site → Import an existing project**
-2. Pilih GitHub, lalu pilih repositori tadi
-3. Bagian build biarkan kosong, publish directory diisi titik: `.`
-4. Tekan **Deploy**
+Isi website disimpan di database Supabase, satu baris berisi satu dokumen.
+Aturan aksesnya dipasang di server, bukan di halaman:
 
-### 3. Nyalakan pintu login
+- **Siapa pun boleh membaca** — memang untuk ditampilkan ke pengunjung
+- **Hanya yang sudah login boleh mengubah** — sudah diuji, upaya mengubah
+  tanpa login tidak mengubah apa pun
 
-Di dashboard Netlify, pada situs tersebut:
+Setiap penyimpanan mencatat siapa yang mengubah dan kapan.
 
-1. **Site configuration → Identity → Enable Identity**
-2. Masih di Identity: **Registration → Invite only**
-   (wajib, supaya orang lain tidak bisa mendaftar sendiri)
-3. **Services → Git Gateway → Enable Git Gateway**
-4. Tab **Identity → Invite users**, masukkan email Anda
+Kunci yang tertulis di `assets/js/koneksi.js` aman dibuka umum — memang
+dirancang untuk ditempel di website. Pengamanannya ada pada aturan di server
+tadi, bukan pada kunci itu.
 
-Cek email undangannya, buat kata sandi, dan Anda akan langsung diarahkan ke
-menu admin.
+## Kalau database sedang bermasalah
 
-## Catatan penting
+Website tetap tampil. Ada salinan cadangan di `data/site.json` yang otomatis
+dipakai kalau database tidak bisa dihubungi dalam 6 detik. Sudah diuji: dengan
+alamat database sengaja dirusak, halaman tetap lengkap.
 
-**Isi website sekarang ada di `data/site.json`**, bukan lagi di file
-JavaScript. File itu tetap boleh diubah manual dengan editor teks, tapi kalau
-sudah pakai menu admin sebaiknya lewat menu saja supaya tidak bentrok.
+Salinan cadangan itu tidak ikut berubah saat Anda menyimpan lewat menu admin.
+Sesekali perbarui dengan menyalin isi terbaru dari database, supaya
+cadangannya tidak terlalu ketinggalan.
 
-**Halaman ini harus dibuka lewat alamat http://**, tidak bisa dengan klik ganda
-`index.html` dari Finder — karena isinya diambil dari file JSON terpisah. Untuk
-melihat di komputer sendiri, jalankan `python3 preview-lokal.py`.
+## Catatan
 
-**Jangan hapus folder `admin/`** saat mengunggah ke hosting. Isinya hanya dua
-file kecil dan tidak berisi kata sandi apa pun — pengamanannya ada di Netlify,
-bukan di file.
+**Halaman harus dibuka lewat alamat http://**, tidak bisa dengan klik ganda
+`index.html` dari Finder. Untuk melihat di komputer sendiri, jalankan
+`python3 preview-lokal.py` lalu buka `http://localhost:4400`.
+
+**Kata sandi database** tersimpan di `.supabase-db-password.txt` di folder ini.
+File itu sengaja tidak ikut naik ke GitHub. Pindahkan ke tempat penyimpanan
+kata sandi Anda, lalu hapus filenya.

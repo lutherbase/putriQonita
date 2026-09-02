@@ -1,26 +1,69 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
-  <title>Menu Admin — Pengaturan Website</title>
-  <link rel="icon" href="../assets/img/favicon.svg">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Menu Admin — Pengaturan Website</title>
+<link rel="icon" href="../assets/img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
 </head>
 <body>
-  <script>
-    // Dijalankan manual supaya alamat website bisa diisikan otomatis di bawah.
-    window.CMS_MANUAL_INIT = true;
-  </script>
-  <script src="https://unpkg.com/decap-cms@^3.8.3/dist/decap-cms.js"></script>
-  <script>
-    // Sisa pengaturan dibaca dari admin/config.yml; di sini hanya alamat
-    // website yang ditambahkan, diambil dari alamat yang sedang dibuka.
-    window.CMS.init({
-      config: {
-        backend: { base_url: window.location.origin }
-      }
-    });
-  </script>
+
+<!-- ================= LAYAR MASUK ================= -->
+<div id="layarMasuk" class="masuk">
+  <form class="masuk__kotak" id="formMasuk" autocomplete="on">
+    <div class="masuk__logo" id="masukLogo">GH</div>
+    <h1>Menu Admin</h1>
+    <p class="masuk__sub">Masuk untuk mengubah isi website</p>
+
+    <label class="kol">
+      <span>Email</span>
+      <input type="email" id="email" required autocomplete="username" placeholder="nama@email.com">
+    </label>
+    <label class="kol">
+      <span>Kata Sandi</span>
+      <input type="password" id="sandi" required autocomplete="current-password" placeholder="••••••••">
+    </label>
+
+    <p class="masuk__galat" id="masukGalat" hidden></p>
+    <button class="tbl tbl--utama" type="submit" id="tblMasuk">Masuk</button>
+    <p class="masuk__bantuan">Lupa kata sandi? Hubungi pengelola website Anda.</p>
+  </form>
+</div>
+
+<!-- ================= APLIKASI ================= -->
+<div id="aplikasi" hidden>
+  <header class="atas">
+    <div class="atas__kiri">
+      <span class="atas__logo" id="atasLogo">GH</span>
+      <div>
+        <strong id="atasNama">Menu Admin</strong>
+        <span class="atas__sub" id="atasInfo"></span>
+      </div>
+    </div>
+    <div class="atas__kanan">
+      <span class="simpan-info" id="simpanInfo"></span>
+      <a class="tbl tbl--polos" href="../" target="_blank" rel="noopener">Lihat Website</a>
+      <button class="tbl tbl--utama" id="tblSimpan" disabled>Simpan Perubahan</button>
+      <button class="tbl tbl--polos" id="tblKeluar" title="Keluar">Keluar</button>
+    </div>
+  </header>
+
+  <div class="badan">
+    <nav class="sisi" id="sisi"></nav>
+    <main class="isi" id="isi"></main>
+  </div>
+</div>
+
+<div class="kabar" id="kabar" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../assets/js/koneksi.js"></script>
+<script src="skema.js"></script>
+<script src="admin.js"></script>
 </body>
 </html>

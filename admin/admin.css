@@ -1,0 +1,111 @@
+/* Tampilan menu admin. Sengaja dibuat besar dan lapang supaya nyaman
+   dipakai di HP maupun laptop. */
+:root{
+  --ink:#0d1b24; --ink-2:#16303f; --abu:#5d7280; --garis:#e3e9ed; --latar:#f5f7f9;
+  --hijau:#1f7a4d; --hijau-2:#17603c; --emas:#a8802a; --merah:#c0392b;
+  --r:12px; --bayang:0 2px 10px -4px rgba(13,27,36,.18);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:var(--ink);background:var(--latar);font-size:15px}
+button,input,textarea,select{font:inherit;color:inherit}
+
+/* ---------- tombol ---------- */
+.tbl{border:1px solid var(--garis);background:#fff;padding:10px 16px;border-radius:10px;cursor:pointer;
+  font-weight:700;font-size:14px;text-decoration:none;color:var(--ink);display:inline-flex;align-items:center;gap:6px;
+  transition:background .2s,border-color .2s,transform .1s}
+.tbl:hover{background:#f0f3f5}
+.tbl:active{transform:translateY(1px)}
+.tbl--utama{background:var(--hijau);border-color:var(--hijau);color:#fff}
+.tbl--utama:hover{background:var(--hijau-2)}
+.tbl--utama:disabled{background:#b7c3ca;border-color:#b7c3ca;cursor:default;transform:none}
+.tbl--kecil{padding:6px 10px;font-size:13px;border-radius:8px}
+.tbl--bahaya{color:var(--merah);border-color:#f0d5d1}
+.tbl--bahaya:hover{background:#fdf2f0}
+
+/* ---------- layar masuk ---------- */
+.masuk{min-height:100vh;display:grid;place-items:center;padding:24px;
+  background:linear-gradient(160deg,#0d1b24,#16303f)}
+.masuk__kotak{background:#fff;padding:36px 32px;border-radius:18px;width:100%;max-width:390px;
+  box-shadow:0 24px 60px -20px rgba(0,0,0,.5)}
+.masuk__logo{width:52px;height:52px;border-radius:14px;background:var(--ink);color:#fff;display:grid;
+  place-items:center;font-weight:800;letter-spacing:.5px;margin-bottom:18px}
+.masuk__kotak h1{margin:0;font-size:23px}
+.masuk__sub{margin:6px 0 24px;color:var(--abu);font-size:14px}
+.masuk__galat{background:#fdf2f0;color:var(--merah);border:1px solid #f0d5d1;padding:10px 12px;
+  border-radius:10px;font-size:13.5px;margin:0 0 14px;line-height:1.5}
+.masuk__bantuan{color:var(--abu);font-size:12.5px;text-align:center;margin:16px 0 0}
+.masuk .tbl--utama{width:100%;justify-content:center;padding:13px}
+
+.kol{display:block;margin-bottom:16px}
+.kol>span{display:block;font-weight:700;font-size:13.5px;margin-bottom:6px}
+.kol input,.kol textarea,.kol select{width:100%;padding:11px 13px;border:1px solid var(--garis);
+  border-radius:10px;background:#fff;outline:0}
+.kol input:focus,.kol textarea:focus,.kol select:focus{border-color:var(--hijau);box-shadow:0 0 0 3px rgba(31,122,77,.13)}
+.kol textarea{min-height:92px;resize:vertical;line-height:1.55}
+.kol .bantuan{display:block;color:var(--abu);font-size:12.5px;margin-top:5px;line-height:1.5}
+.kol .salah{color:var(--merah);font-size:12.5px;margin-top:5px;display:none}
+.kol.is-salah input,.kol.is-salah textarea{border-color:var(--merah)}
+.kol.is-salah .salah{display:block}
+
+/* ---------- rangka aplikasi ---------- */
+.atas{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--garis);
+  display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 20px;flex-wrap:wrap}
+.atas__kiri{display:flex;align-items:center;gap:12px}
+.atas__logo{width:38px;height:38px;border-radius:10px;background:var(--ink);color:#fff;display:grid;
+  place-items:center;font-weight:800;font-size:14px}
+.atas__kiri strong{display:block;font-size:15px}
+.atas__sub{color:var(--abu);font-size:12.5px}
+.atas__kanan{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.simpan-info{color:var(--abu);font-size:12.5px}
+
+.badan{display:grid;grid-template-columns:250px 1fr;align-items:start;gap:22px;
+  max-width:1180px;margin:0 auto;padding:22px 20px 80px}
+.sisi{position:sticky;top:78px;background:#fff;border:1px solid var(--garis);border-radius:var(--r);
+  padding:8px;box-shadow:var(--bayang)}
+.sisi button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;
+  padding:10px 12px;border-radius:9px;cursor:pointer;font-size:14px;font-weight:600;color:var(--ink)}
+.sisi button:hover{background:#f0f3f5}
+.sisi button.aktif{background:var(--ink);color:#fff}
+.sisi .ikon{font-size:16px;width:22px;text-align:center}
+
+.isi{background:#fff;border:1px solid var(--garis);border-radius:var(--r);padding:26px;box-shadow:var(--bayang);min-height:60vh}
+.isi h2{margin:0 0 4px;font-size:21px}
+.isi .catatan{color:var(--abu);font-size:13.5px;margin:0 0 22px;line-height:1.6;
+  background:#f5f7f9;border-left:3px solid var(--garis);padding:10px 12px;border-radius:0 8px 8px 0}
+
+/* ---------- daftar berisi kartu ---------- */
+.kartu{border:1px solid var(--garis);border-radius:var(--r);margin-bottom:12px;background:#fff;overflow:hidden}
+.kartu__kepala{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#fafbfc;cursor:pointer}
+.kartu__nomor{width:24px;height:24px;border-radius:7px;background:var(--ink);color:#fff;display:grid;
+  place-items:center;font-size:12px;font-weight:800;flex:none}
+.kartu__judul{flex:1;font-weight:700;font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kartu__aksi{display:flex;gap:5px;flex:none}
+.kartu__isi{padding:18px 14px 4px;border-top:1px solid var(--garis)}
+.kartu.tutup .kartu__isi{display:none}
+.kartu__panah{color:var(--abu);font-size:12px;flex:none}
+
+.baris-teks{display:flex;gap:8px;margin-bottom:8px}
+.baris-teks input{flex:1;padding:10px 12px;border:1px solid var(--garis);border-radius:9px;outline:0}
+.baris-teks input:focus{border-color:var(--hijau);box-shadow:0 0 0 3px rgba(31,122,77,.13)}
+
+.gambar-kol{display:flex;gap:12px;align-items:flex-start}
+.gambar-pratinjau{width:74px;height:74px;border-radius:10px;border:1px solid var(--garis);object-fit:cover;
+  background:#f0f3f5;flex:none}
+.gambar-kanan{flex:1;min-width:0}
+
+.tambah{margin-top:6px}
+.kosong{color:var(--abu);font-size:13.5px;padding:14px;background:#fafbfc;border-radius:10px;text-align:center}
+
+/* ---------- pemberitahuan ---------- */
+.kabar{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;
+  background:var(--ink);color:#fff;padding:13px 20px;border-radius:11px;font-weight:600;font-size:14px;
+  box-shadow:0 16px 40px -12px rgba(0,0,0,.5);max-width:90vw;text-align:center}
+.kabar.salah{background:var(--merah)}
+
+@media (max-width:860px){
+  .badan{grid-template-columns:1fr;padding:14px 12px 70px}
+  .sisi{position:static;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px}
+  .isi{padding:18px 14px}
+  .atas{padding:10px 12px}
+  .atas__kanan{width:100%;justify-content:flex-end}
+}
