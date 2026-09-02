@@ -3,8 +3,15 @@
 # Semua yang diubah di /admin akan tersimpan ke data/site.json
 # ---------------------------------------------------------------------------
 backend:
-  name: git-gateway
+  name: github
+  repo: lutherbase/putriQonita
   branch: main
+  # Login lewat GitHub, ditangani oleh website ini sendiri
+  # (lihat netlify/functions/auth.js dan callback.js).
+  # base_url TIDAK ditulis di sini — diisi otomatis dari alamat website
+  # yang sedang dibuka (lihat admin/index.html), supaya tetap jalan
+  # kalau nanti Anda memasang domain sendiri.
+  auth_endpoint: api/auth
 
 # Foto yang diunggah lewat menu admin masuk ke folder ini
 media_folder: "assets/img"

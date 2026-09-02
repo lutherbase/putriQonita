@@ -8,9 +8,19 @@
   <link rel="icon" href="../assets/img/favicon.svg">
 </head>
 <body>
-  <!-- Pintu login (Netlify Identity) -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <!-- Menu admin (Decap CMS) -->
+  <script>
+    // Dijalankan manual supaya alamat website bisa diisikan otomatis di bawah.
+    window.CMS_MANUAL_INIT = true;
+  </script>
   <script src="https://unpkg.com/decap-cms@^3.8.3/dist/decap-cms.js"></script>
+  <script>
+    // Sisa pengaturan dibaca dari admin/config.yml; di sini hanya alamat
+    // website yang ditambahkan, diambil dari alamat yang sedang dibuka.
+    window.CMS.init({
+      config: {
+        backend: { base_url: window.location.origin }
+      }
+    });
+  </script>
 </body>
 </html>
