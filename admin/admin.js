@@ -14,7 +14,13 @@
      bawah ini. Akhiran ini tidak pernah dikirimi surat dan tidak perlu
      diketahui pemakai — dia cukup mengetik "putri". */
   const AKHIRAN = "@akun.local";
-  const keEmail = (nama) => String(nama || "").trim().toLowerCase() + AKHIRAN;
+
+  /* Terima dua-duanya: "putri" maupun "putri@akun.local" ditulis lengkap.
+     Sering terjadi orang menyalin alamat lengkapnya dari panduan. */
+  function keEmail(ketikan) {
+    const t = String(ketikan || "").trim().toLowerCase();
+    return t.includes("@") ? t : t + AKHIRAN;
+  }
   const kePengguna = (email) => String(email || "").replace(AKHIRAN, "");
 
   let data = null;          // isi website yang sedang diedit
